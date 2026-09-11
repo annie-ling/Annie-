@@ -106,6 +106,5 @@
   .price-box{display:none!important}
 }
 
-
-/* V6.9 — remove print/save PDF feature */
+/* V6.10: print/save feature removed */
 #printReport{display:none!important;}

@@ -1,13 +1,27 @@
-## V6.9 移除列印／儲存 PDF
-- 保留 V6.6 已成功的 Supabase 授權與價格
-- 移除列印／儲存 PDF 按鈕與功能
+## V6.11｜免費測試紀錄後台
+
+新增 `free_test_records` 後台紀錄表。網站只會送出：
+- 暱稱（選填）
+- 生命靈數與主題
+- 太陽／月亮／上升
+- 人類圖類型／權威／角色
+- 八字日主
+- 免費／Premium 狀態
+- 測試時間
+
+**不儲存出生日期、出生時間、經緯度。**
+
+部署前請先到 Supabase SQL Editor 執行 `free-test-tracking.sql`。
+
+## V6.10
+已完整移除「列印／儲存 PDF」按鈕、列印事件與 PDF 銷售文字。
 
 ## V6.5 RPC 除錯修正版\n- Publishable key 僅放 apikey header\n- 支援 Supabase 回傳 success/message\n- 驗證錯誤會直接顯示於網頁，方便定位\n\n# 玄學人格研究所 V6 Premium｜獨立授權碼版
 
 這版把 V5.2 的「共用前端密碼」升級成 Supabase 後端驗證。
 
 ## 客人流程
-免費解析 → LINE 詢問／付款 → 你建立一組專屬碼 → 客人輸入 → 後端驗證 → 綁定該瀏覽器 → Premium 完整解析＋PDF。
+免費解析 → LINE 詢問／付款 → 你建立一組專屬碼 → 客人輸入 → 後端驗證 → 綁定該瀏覽器 → Premium 完整解析。
 
 ## 為什麼比 V5.2 安全
 - 網頁原始碼不再放 `LING2027VIP` 這種共用密碼。
@@ -53,5 +67,3 @@ select public.admin_create_premium_code(
 5. 同一組碼換另一個無痕視窗／裝置再啟用，若 `max_uses=1` 應顯示已達使用上限。
 6. 原本已成功的瀏覽器重新整理後，會由後端確認並恢復 Premium 授權。
 
-## PDF
-網頁維持深色玄學風；列印／儲存 PDF 會使用白底、深色文字與低調金色重點。

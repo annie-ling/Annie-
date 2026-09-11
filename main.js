@@ -358,7 +358,7 @@ document.querySelector('#app').innerHTML = `
   <div class="section-title">
     <span class="eyebrow">YOUR BIRTH CODE</span>
     <h2>輸入你的出生資料</h2>
-    <p>資料只在瀏覽器內計算，不需要輸入姓名或帳號。</p>
+    <p>出生資料用於瀏覽器內排盤；後台只記錄「暱稱（如有填寫）＋解析結果摘要＋測試時間」，不儲存出生日期與出生時間。</p>
   </div>
 
   <form id="birthForm" class="form-card">
@@ -482,11 +482,11 @@ document.querySelector('#app').innerHTML = `
     <span class="premium-badge">PREMIUM 完整人生解析</span>
     <h2>想看更深的你？</h2>
     <p>完整版本包含感情關係藍圖、事業與財富模式、人生挑戰、內在小孩、阿卡西式靈魂探索、2027 四季導航與行動計畫。</p>
-    <div class="unlock-points"><span>♡ 感情深度解析</span><span>✦ 事業／適合賺什麼錢</span><span>☾ 2027 年度導航</span><span>◇ 完整 PDF 人生報告</span></div>
+    <div class="unlock-points"><span>♡ 感情深度解析</span><span>✦ 事業／適合賺什麼錢</span><span>☾ 2027 年度導航</span><span>◇ 完整深度人生報告</span></div>
     <div class="price-box" aria-label="付費完整解析價格">
       <div class="price-original"><span>原價</span><del>NT$990</del></div>
       <div class="price-launch"><span>首發體驗價</span><strong>NT$590</strong></div>
-      <div class="price-caption">一次解鎖・完整深度解析＋PDF 報告</div>
+      <div class="price-caption">一次解鎖・完整深度解析報告</div>
     </div>
     <a class="line-pay" href="https://line.me/ti/p/Vfr2_tJJK7" target="_blank" rel="noopener">加入 LINE｜詢問付費完整解析</a>
     <p class="unlock-note">加入後請傳送「完整解析＋你的姓名／暱稱」。付款確認後，我會提供你的專屬解鎖碼。</p>
@@ -503,7 +503,6 @@ document.querySelector('#app').innerHTML = `
     <span class="premium-badge">PREMIUM COMPLETE READING</span>
     <h2><span id="reportName">你的</span>完整人生解析</h2>
     <p>這一區為付費完整版內容。建議搭配實際生活經驗閱讀，而不是把任何玄學系統當成命定答案。</p>
-    
   </div>
   <div class="premium-grid">
     <article class="premium-panel"><span class="eyebrow">13 · RELATIONSHIP BLUEPRINT</span><h3>你的關係藍圖</h3><div class="premium-split"><div><small>適合你的綠旗</small><p id="loveGreen"></p></div><div><small>需要留意的紅旗</small><p id="loveRed"></p></div></div><div class="premium-callout"><small>感情使用說明</small><p id="loveManual"></p></div></article>
@@ -576,6 +575,16 @@ async function callPremiumRpc(fn, payload){
   return data;
 }
 
+async function logFreeTestSummary(payload){
+  if(!apiConfigured()) return;
+  try{
+    await callPremiumRpc('record_free_test', payload);
+  }catch(err){
+    // 紀錄失敗不能影響使用者取得解析結果
+    console.warn('Free test log failed', err);
+  }
+}
+
 function setPremiumState(unlocked, message=''){
   premiumUnlocked=!!unlocked;
   const msg=document.querySelector('#unlockStatus');
@@ -599,6 +608,7 @@ async function restorePremiumAccess(){
     console.warn('Premium restore failed',err);
   }
 }
+
 document.querySelector('#unlockPremium').addEventListener('click',async()=>{
   const input=document.querySelector('#premiumCode');
   const btn=document.querySelector('#unlockPremium');
@@ -742,6 +752,20 @@ document.querySelector('#birthForm').addEventListener('submit', async e=>{
     if(premiumUnlocked) premiumReport.classList.remove('hidden');
     else premiumReport.classList.add('hidden');
 
+    // 只記錄解析摘要，不送出出生日期／出生時間
+    logFreeTestSummary({
+      p_nickname: client || null,
+      p_life_path: lp,
+      p_life_name: life.name,
+      p_sun: sun,
+      p_moon: moon,
+      p_rising: rising,
+      p_hd_type: typeName(hd),
+      p_hd_authority: authorityName(hd),
+      p_hd_profile: profile,
+      p_day_master: `${dm.stem}${dm.element}`,
+      p_access_type: premiumUnlocked ? 'Premium' : '免費'
+    });
 
     results.classList.remove('hidden');
     results.scrollIntoView({behavior:'smooth'});
