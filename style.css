@@ -11,3 +11,45 @@
 
 .code-unlock{max-width:650px;margin:26px auto 0;padding:20px;border:1px solid rgba(221,185,130,.22);border-radius:18px;background:rgba(255,255,255,.025);text-align:left}.code-unlock label{display:block;color:var(--gold);font-weight:800;margin-bottom:9px}.code-row{display:flex;gap:8px}.code-row input{margin:0;flex:1;text-transform:uppercase}.code-row button{border:0;border-radius:12px;padding:0 18px;background:linear-gradient(135deg,var(--gold),var(--lav));color:#17111e;font:inherit;font-weight:800;cursor:pointer}.unlock-status{margin:10px 0 0!important;font-size:.78rem!important;color:#a89dac!important}.unlock-status.success{color:var(--gold)!important}@media(max-width:600px){.code-row{flex-direction:column}.code-row button{padding:13px}}@media print{.code-unlock{display:none!important}}
 .code-row button:disabled{opacity:.6;cursor:wait}.unlock-status.error{color:#d7a5a5!important}
+
+
+/* V6.1 — Clean white PDF / print output */
+@media print{
+  html,body,#app,main,.section,.premium-report,.cards,.premium-grid{
+    background:#fff!important;
+    background-image:none!important;
+    color:#000!important;
+  }
+  body *{
+    text-shadow:none!important;
+  }
+  .panel,.premium-panel,.premium-head,.share-card,.deep-box,.premium-callout,
+  .premium-split>div,.wealth-cards div,.quarter-grid div,.action-grid>div,
+  .mini-grid>div,.facts>div,.trio>div,.pillars>div,.month-grid>div,
+  .takeaway #fiveTakeaways>div{
+    background:#fff!important;
+    background-image:none!important;
+    color:#000!important;
+    box-shadow:none!important;
+    border-color:#d8d8d8!important;
+  }
+  h1,h2,h3,h4,h5,h6,p,span,strong,b,small,div,li,
+  .panel p,.premium-panel p,.premium-head p,.share-card p,.deep-box p,
+  .premium-callout p,.month-grid span,.month-grid small,.facts small,
+  .trio small,.pillars small,.mini-grid small{
+    color:#000!important;
+  }
+  .eyebrow,.premium-badge,.trio span,.month-grid strong,.deep-box small,
+  .premium-split small,.premium-callout small,.quarter-grid small,
+  .wealth-cards b,.action-grid b{
+    color:#000!important;
+  }
+  .premium-badge{
+    background:#fff!important;
+    border:1px solid #999!important;
+  }
+  *{
+    -webkit-print-color-adjust:economy!important;
+    print-color-adjust:economy!important;
+  }
+}
