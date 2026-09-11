@@ -340,7 +340,7 @@ document.querySelector('#app').innerHTML = `
     <span class="eyebrow">MYSTIC PROFILE LAB · V5 PREMIUM</span>
     <h1>五種系統，<br><em>拼出更完整的你。</em></h1>
     <p>生命靈數 × 西洋占星 × 人類圖 × 八字五行 × 水晶象徵。輸入出生資料，生成你的個人能量說明書。</p>
-    <a class="primary" href="#birth">生成我的付費完整報告</a>
+    <a class="primary" href="#birth">先生成免費人格解析</a>
   </div>
 </header>
 
@@ -379,7 +379,7 @@ document.querySelector('#app').innerHTML = `
       <label>經度<input id="lon" type="number" step="0.0001" placeholder="-0.1278"></label>
       <label>UTC 時差<input id="tz" type="number" step="0.5" placeholder="0"></label>
     </div>
-    <button class="primary submit" type="submit">生成完整解析 ✦</button>
+    <button class="primary submit" type="submit">生成免費解析 ✦</button>
     <div id="status" class="status"></div>
     <p class="fineprint">玄學、占星、人類圖、八字與水晶屬文化／自我探索系統，不具有科學診斷或預測保證。請勿用於醫療、心理、法律、投資等高風險決策。</p>
   </form>
@@ -473,6 +473,17 @@ document.querySelector('#app').innerHTML = `
     <article class="panel"><span class="eyebrow">11 · AKASHIC-STYLE REFLECTION</span><h3>阿卡西式靈魂探索</h3><p id="akashicDeep"></p><div class="note">此區是象徵性自我探索文字，不宣稱能讀取或驗證超自然的「阿卡西紀錄」。</div></article>
     <article class="panel synthesis year-panel"><span class="eyebrow">12 · 2027 NAVIGATION</span><h3>2027 年度導航</h3><p id="year2027Deep"></p><div class="month-grid" id="monthGuide"></div></article>
     <article class="panel synthesis takeaway"><span class="eyebrow">REMEMBER THESE 5 THINGS</span><h3>如果你只記得這份報告的 5 件事</h3><div id="fiveTakeaways"></div></article>
+  </div>
+</section>
+
+<section id="unlock" class="section unlock-section">
+  <div class="unlock-card">
+    <span class="premium-badge">PREMIUM 完整人生解析</span>
+    <h2>想看更深的你？</h2>
+    <p>完整版本包含感情關係藍圖、事業與財富模式、人生挑戰、內在小孩、阿卡西式靈魂探索、2027 四季導航與行動計畫。</p>
+    <div class="unlock-points"><span>♡ 感情深度解析</span><span>✦ 事業／適合賺什麼錢</span><span>☾ 2027 年度導航</span><span>◇ 完整 PDF 人生報告</span></div>
+    <a class="line-pay" href="https://line.me/ti/p/Vfr2_tJJK7" target="_blank" rel="noopener">加入 LINE｜詢問付費完整解析</a>
+    <p class="unlock-note">加入後請傳送「完整解析＋你的姓名／暱稱」，確認方案與付款後提供完整報告。</p>
   </div>
 </section>
 
