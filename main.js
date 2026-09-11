@@ -483,6 +483,11 @@ document.querySelector('#app').innerHTML = `
     <h2>想看更深的你？</h2>
     <p>完整版本包含感情關係藍圖、事業與財富模式、人生挑戰、內在小孩、阿卡西式靈魂探索、2027 四季導航與行動計畫。</p>
     <div class="unlock-points"><span>♡ 感情深度解析</span><span>✦ 事業／適合賺什麼錢</span><span>☾ 2027 年度導航</span><span>◇ 完整 PDF 人生報告</span></div>
+    <div class="price-box" aria-label="付費完整解析價格">
+      <div class="price-original"><span>原價</span><del>NT$990</del></div>
+      <div class="price-launch"><span>首發體驗價</span><strong>NT$590</strong></div>
+      <div class="price-caption">一次解鎖・完整深度解析＋PDF 報告</div>
+    </div>
     <a class="line-pay" href="https://line.me/ti/p/Vfr2_tJJK7" target="_blank" rel="noopener">加入 LINE｜詢問付費完整解析</a>
     <p class="unlock-note">加入後請傳送「完整解析＋你的姓名／暱稱」。付款確認後，我會提供你的專屬解鎖碼。</p>
     <div class="code-unlock">

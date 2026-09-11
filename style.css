@@ -53,3 +53,55 @@
     print-color-adjust:economy!important;
   }
 }
+
+
+/* V6.3 — Premium launch pricing */
+.price-box{
+  max-width:650px;
+  margin:22px auto 18px;
+  padding:20px 22px;
+  border:1px solid rgba(221,185,130,.34);
+  border-radius:20px;
+  background:linear-gradient(135deg,rgba(221,185,130,.09),rgba(199,181,230,.07));
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px 20px;
+  align-items:end;
+  text-align:center;
+}
+.price-original span,.price-launch span{
+  display:block;
+  font-size:.78rem;
+  letter-spacing:.08em;
+  color:var(--muted);
+  margin-bottom:4px;
+}
+.price-original del{
+  color:#b6acba;
+  font-size:1.35rem;
+  text-decoration-thickness:1.5px;
+}
+.price-launch span{color:var(--gold)}
+.price-launch strong{
+  display:block;
+  color:var(--gold);
+  font-size:2.15rem;
+  line-height:1;
+  letter-spacing:.01em;
+}
+.price-caption{
+  grid-column:1/-1;
+  margin-top:7px;
+  padding-top:12px;
+  border-top:1px solid rgba(221,185,130,.17);
+  color:#d7cedc;
+  font-size:.82rem;
+}
+@media(max-width:520px){
+  .price-box{padding:18px 15px;gap:8px 12px}
+  .price-launch strong{font-size:1.9rem}
+  .price-original del{font-size:1.2rem}
+}
+@media print{
+  .price-box{display:none!important}
+}
