@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="免費生命靈數計算器：輸入生日，探索你的核心性格、天賦、感情、金錢模式與2026個人流年。" />
+  <title>數字裡的你｜生命靈數探索</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;600;700&family=Noto+Sans+TC:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="noise"></div>
+
+  <header class="hero">
+    <nav class="nav">
+      <div class="brand">數字裡的你</div>
+      <a href="#calculator" class="nav-link">開始探索</a>
+    </nav>
+
+    <div class="hero-inner">
+      <span class="eyebrow">LIFE PATH NUMBER</span>
+      <h1>你的生日，<br>藏著一份屬於你的人生說明書。</h1>
+      <p class="hero-copy">
+        有些性格、選擇與人生課題，可能早就藏在你的出生數字裡。
+        從生命靈數開始，重新認識真正的自己。
+      </p>
+      <a class="primary-btn" href="#calculator">免費測出我的生命靈數</a>
+    </div>
+  </header>
+
+  <main>
+    <section id="calculator" class="section calculator-section">
+      <div class="section-heading">
+        <span class="eyebrow">01 / YOUR NUMBER</span>
+        <h2>輸入你的出生日期</h2>
+        <p>我們會為你計算生命靈數，以及 2026 個人流年。</p>
+      </div>
+
+      <form id="numberForm" class="calculator-card">
+        <label for="birthdate">出生日期</label>
+        <input id="birthdate" type="date" required />
+        <button type="submit" class="primary-btn full">開始解析</button>
+        <p class="tiny">本頁內容為自我探索與娛樂用途，不構成醫療、財務或重大人生決策建議。</p>
+      </form>
+    </section>
+
+    <section id="result" class="section result-section hidden">
+      <div class="result-shell">
+        <div class="number-orb">
+          <span>你的生命靈數</span>
+          <strong id="lifePathNumber">6</strong>
+        </div>
+
+        <div class="result-content">
+          <span class="eyebrow">YOUR CORE ENERGY</span>
+          <h2 id="resultTitle"></h2>
+          <p id="resultIntro" class="lead"></p>
+
+          <div class="keywords" id="keywords"></div>
+
+          <div class="grid">
+            <article class="info-card">
+              <span>天生性格</span>
+              <p id="personality"></p>
+            </article>
+            <article class="info-card">
+              <span>隱藏天賦</span>
+              <p id="talent"></p>
+            </article>
+            <article class="info-card">
+              <span>感情模式</span>
+              <p id="love"></p>
+            </article>
+            <article class="info-card">
+              <span>金錢模式</span>
+              <p id="money"></p>
+            </article>
+            <article class="info-card">
+              <span>容易卡住</span>
+              <p id="challenge"></p>
+            </article>
+            <article class="info-card">
+              <span>人生課題</span>
+              <p id="lesson"></p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="yearResult" class="section year-section hidden">
+      <div class="year-card">
+        <div>
+          <span class="eyebrow">02 / 2026 PERSONAL YEAR</span>
+          <h2>你的 2026 個人流年：<span id="personalYear"></span></h2>
+        </div>
+        <p id="yearMeaning" class="lead"></p>
+      </div>
+    </section>
+
+    <section class="section cta-section">
+      <div class="cta-card">
+        <span class="eyebrow">GO DEEPER</span>
+        <h2>這只是你的第一層數字。</h2>
+        <p>
+          如果你想更深入了解自己的天賦、感情、金錢、事業與年度能量，
+          這裡可以放你的完整版生命靈數報告、電子書或 1 對 1 解析服務。
+        </p>
+        <a class="secondary-btn" href="#" onclick="alert('請把這個按鈕連結改成你的 Beacons、LINE 或商品頁面'); return false;">解鎖完整解析</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 數字裡的你 · Life Path Explorer</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
