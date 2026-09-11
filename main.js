@@ -503,7 +503,7 @@ document.querySelector('#app').innerHTML = `
     <span class="premium-badge">PREMIUM COMPLETE READING</span>
     <h2><span id="reportName">你的</span>完整人生解析</h2>
     <p>這一區為付費完整版內容。建議搭配實際生活經驗閱讀，而不是把任何玄學系統當成命定答案。</p>
-    <button id="printReport" class="outline" type="button">列印／儲存 PDF</button>
+    
   </div>
   <div class="premium-grid">
     <article class="premium-panel"><span class="eyebrow">13 · RELATIONSHIP BLUEPRINT</span><h3>你的關係藍圖</h3><div class="premium-split"><div><small>適合你的綠旗</small><p id="loveGreen"></p></div><div><small>需要留意的紅旗</small><p id="loveRed"></p></div></div><div class="premium-callout"><small>感情使用說明</small><p id="loveManual"></p></div></article>
@@ -599,8 +599,6 @@ async function restorePremiumAccess(){
     console.warn('Premium restore failed',err);
   }
 }
-
-document.querySelector('#printReport').addEventListener('click',()=>window.print());
 document.querySelector('#unlockPremium').addEventListener('click',async()=>{
   const input=document.querySelector('#premiumCode');
   const btn=document.querySelector('#unlockPremium');
