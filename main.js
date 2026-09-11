@@ -241,15 +241,106 @@ function monthGuideFn(date, year=2027){
   return Array.from({length:12},(_,i)=>{let n=base+i+1;while(n>9)n=sumDigits(n);return `<div><small>${i+1}月</small><strong>${n}</strong><span>${labels[n]}</span></div>`}).join('');
 }
 
+
+function premiumBundle({lifeNum, life, moon, rising, hdType, authority, strategy, dm, py2027}){
+  const partner={
+    '牡羊座':['敢說、直接、有行動力','冷處理、拖延、話不說清楚'],
+    '金牛座':['穩定、守信用、願意給安全感','忽冷忽熱、承諾反覆、生活節奏太混亂'],
+    '雙子座':['好聊、有趣、願意分享','不溝通、過度控制、思想封閉'],
+    '巨蟹座':['情緒有回應、重視家庭與陪伴','嘲諷情緒、逃避溝通、缺乏安全感'],
+    '獅子座':['肯定你、公開珍惜你、願意一起成長','貶低、忽視、讓你長期感到不被重視'],
+    '處女座':['可靠、細心、願意一起解決問題','只批評不溝通、生活失序、沒有責任感'],
+    '天秤座':['尊重、溫和、願意討論彼此需求','長期搖擺、逃避決定、表面和平但不處理問題'],
+    '天蠍座':['忠誠、深度、真誠而有界線','隱瞞、權力拉扯、情緒操控'],
+    '射手座':['給空間、能一起探索、支持成長','限制自由、過度黏著、價值觀差距太大'],
+    '摩羯座':['有承諾、做得到、願意規劃未來','只有承諾沒有行動、責任全丟給你'],
+    '水瓶座':['懂你的不同、尊重空間、能思想交流','控制、情緒勒索、要求你迎合傳統期待'],
+    '雙魚座':['溫柔、同理、願意理解感受','界線模糊、逃避現實、把拯救責任丟給你']
+  }[moon] || ['理解你、尊重你、有一致行動','長期忽視需求、控制與情緒勒索'];
+
+  const workMode={
+    '生產者':'有明確回應感、能長期累積熟練度的工作；先感受「有沒有想做」再承諾。',
+    '顯示生產者':'可多線並進、允許快速迭代的工作；你需要彈性，不適合被僵硬流程綁死。',
+    '投射者':'策略、顧問、觀察與引導型角色；價值來自看見系統，而不只是長工時。',
+    '顯示者':'高自主、能發起與帶方向的工作；過度被管理會消耗你的推進力。',
+    '反映者':'環境品質與團隊文化非常重要；適合保留觀察週期再做重大承諾。'
+  }[hdType] || '選擇能讓你保有自主性、持續累積專業價值的工作。';
+
+  const wealth={
+    1:['個人品牌／主理人服務','顧問與決策型收入','高自主專案'],
+    2:['客戶經營／陪伴服務','合作分潤','社群信任型收入'],
+    3:['內容變現／自媒體','美感或創意商品','課程／表達型產品'],
+    4:['流程與營運服務','長期會員／訂閱','系統化數位商品'],
+    5:['行銷／業務／流量變現','跨領域接案','聯盟／合作收入'],
+    6:['生活美感／療癒陪伴','教育與顧問服務','信任型個人品牌商品'],
+    7:['知識產品／研究報告','顧問分析','深度內容訂閱'],
+    8:['高客單商業服務','管理／資源整合','品牌與團隊型收入'],
+    9:['教育／文化／內容影響力','社群型商品','跨國或公益結合商業模式'],
+    11:['啟發型內容品牌','課程／社群','概念型數位商品'],
+    22:['平台／系統／品牌資產','團隊專案','可規模化產品'],
+    33:['教育／陪伴／療癒服務','美感品牌','長期社群與信任型收入']
+  }[lifeNum] || ['專業服務','數位商品','個人品牌'];
+
+  const moneyBlind={
+    1:'過早單打獨鬥，忽略合作能放大成果。',2:'不好意思談價格，容易把體貼變成免費加碼。',3:'想法很多但商品線太散，收入難累積。',4:'過度求穩，可能錯過合理的升級與調價。',5:'追逐新機會太快，還沒建立複利就轉向。',6:'把照顧客人等同無限責任，容易低估自己的服務價值。',7:'研究太久才推出，錯過市場回饋。',8:'把收入當成自我價值，容易承擔過高風險。',9:'理想感很強，可能忽略商業邊界與現金流。',11:'靈感很強但缺乏固定交付，價值不容易被購買。',22:'一開始就做太大，成本和壓力先超過收入。',33:'容易免費付出太多，需要清楚定價與服務範圍。'
+  }[lifeNum] || '收入成長需要同時照顧價值、定價與可持續交付。';
+
+  const shadow={
+    1:['怕被看輕，所以什麼都想自己證明','把求助視為能力的一部分'],
+    2:['怕關係失衡，所以先壓住自己','練習在小事上直接說需求'],
+    3:['怕不夠好，所以靠新鮮感逃避持續','固定一個主題做滿一個週期'],
+    4:['怕失控，所以用規則保護自己','留下 20% 彈性給未知'],
+    5:['怕被困住，所以提前離開','區分「不適合」和「只是進入累積期」'],
+    6:['怕讓人失望，所以承擔過量','先問自己：這真的是我的責任嗎？'],
+    7:['怕判斷錯，所以一直分析','用小規模測試替代無限思考'],
+    8:['怕失敗，所以控制更多','建立停損、授權與客觀指標'],
+    9:['怕失去，所以很難真正結束','允許完成也是一種愛'],
+    11:['感受太多容易焦慮與過載','把直覺寫下來，再用現實資訊驗證'],
+    22:['怕辜負大願景，所以標準過高','把願景拆成 90 天成果'],
+    33:['怕別人受傷，所以一直拯救','陪伴不等於替別人承擔後果']
+  }[lifeNum] || ['容易把壓力內化','把課題拆成可練習的小行動'];
+
+  const innerChild={
+    '金牛座':'你內在的小孩需要的是「穩定不會突然消失的愛」。',
+    '摩羯座':'你內在的小孩很早就學會懂事，現在需要允許自己有脆弱與休息。',
+    '水瓶座':'你內在的小孩希望即使與別人不同，也不用為了被愛而改掉自己。',
+    '巨蟹座':'你內在的小孩最在意被接住，而不是被快速糾正。',
+    '雙魚座':'你內在的小孩需要柔軟的界線：可以共感，但不用承擔所有人的情緒。'
+  }[moon] || `你內在的小孩需要被允許以自己的節奏感受、選擇與成長。`;
+
+  const q={
+    1:['Q1 建立新方向','Q2 快速試做與修正','Q3 強化個人主導權','Q4 固化有效模式'],
+    2:['Q1 整理關係','Q2 合作與耐心','Q3 深化信任','Q4 做出關係選擇'],
+    3:['Q1 找到表達主題','Q2 增加曝光','Q3 把創意商品化','Q4 留下代表作品'],
+    4:['Q1 整理制度','Q2 穩定現金流','Q3 建立流程','Q4 檢查長期基礎'],
+    5:['Q1 打開新選項','Q2 嘗試與移動','Q3 過濾真正機會','Q4 固定值得留下的方向'],
+    6:['Q1 關係排序','Q2 家庭與責任','Q3 承諾與生活品質','Q4 建立更健康的界線'],
+    7:['Q1 減少雜訊','Q2 深度學習','Q3 驗證新理解','Q4 做出更成熟的選擇'],
+    8:['Q1 設定成果','Q2 談價格與資源','Q3 放大有效收入','Q4 財務與權責盤點'],
+    9:['Q1 整理舊事物','Q2 完成未竟項目','Q3 放下不再適合的關係／工作','Q4 為下一輪騰空']
+  }[py2027] || [];
+
+  return {
+    green:partner[0], red:partner[1], workMode,
+    wealth, moneyBlind,
+    shadow:shadow[0], breakthrough:shadow[1], innerChild,
+    akashicLetter:`給現在的你：你不需要把每一次辛苦都解釋成命運安排。若用阿卡西式書寫作為象徵性反思，你此刻更重要的靈魂課題，是把注意力從「我要證明什麼」移回「我真正想創造什麼」。當選擇同時尊重你的感受、現實條件與長期價值，那通常比追求一個神秘的正確答案更可靠。`,
+    quarters:q,
+    action30:`30 天：只選一個最重要的課題。若是事業，就完成一個能被看見的作品／商品；若是關係，就練習一次清楚而不攻擊的需求表達。`,
+    action90:`90 天：建立可衡量成果。收入看成交與現金流、內容看有效觸及與詢問、關係看溝通品質與界線，而不是只看感覺。`,
+    action365:`365 天：建立一個不依賴短期情緒的長期系統——作品庫、客戶資產、儲蓄／投資紀律、關係習慣或專業能力。`
+  };
+}
+
 document.querySelector('#app').innerHTML = `
 <div class="stars"></div>
 <header class="hero">
   <nav><div class="brand">玄學人格研究所</div><a href="#birth">開始探索 ✦</a></nav>
   <div class="hero-copy">
-    <span class="eyebrow">MYSTIC PROFILE LAB · V3.1</span>
+    <span class="eyebrow">MYSTIC PROFILE LAB · V5 PREMIUM</span>
     <h1>五種系統，<br><em>拼出更完整的你。</em></h1>
     <p>生命靈數 × 西洋占星 × 人類圖 × 八字五行 × 水晶象徵。輸入出生資料，生成你的個人能量說明書。</p>
-    <a class="primary" href="#birth">生成我的玄學人格</a>
+    <a class="primary" href="#birth">生成我的付費完整報告</a>
   </div>
 </header>
 
@@ -270,6 +361,7 @@ document.querySelector('#app').innerHTML = `
   </div>
 
   <form id="birthForm" class="form-card">
+    <label>報告姓名／暱稱 <small>選填</small><input id="clientName" type="text" placeholder="例：伊玲"></label>
     <label>出生日期<input id="date" type="date" required></label>
     <label>出生時間<input id="time" type="time" required></label>
     <label>生理性別 <small>八字大運排法使用</small>
@@ -287,7 +379,7 @@ document.querySelector('#app').innerHTML = `
       <label>經度<input id="lon" type="number" step="0.0001" placeholder="-0.1278"></label>
       <label>UTC 時差<input id="tz" type="number" step="0.5" placeholder="0"></label>
     </div>
-    <button class="primary submit" type="submit">開始排盤 ✦</button>
+    <button class="primary submit" type="submit">生成完整解析 ✦</button>
     <div id="status" class="status"></div>
     <p class="fineprint">玄學、占星、人類圖、八字與水晶屬文化／自我探索系統，不具有科學診斷或預測保證。請勿用於醫療、心理、法律、投資等高風險決策。</p>
   </form>
@@ -384,12 +476,22 @@ document.querySelector('#app').innerHTML = `
   </div>
 </section>
 
-<section class="section">
-  <div class="paywall">
-    <span class="eyebrow">FULL ENERGY BOOK</span>
-    <h2>把結果變成一份<br>真正屬於你的能量說明書。</h2>
-    <p>這裡可以接你的付費完整版：感情模式、天賦事業、金錢課題、年度能量、五行補強與個人提醒。</p>
-    <a href="#" onclick="alert('請把這個按鈕改成你的 LINE、Beacons 或付款頁連結');return false;" class="outline">解鎖完整解析</a>
+<section id="premiumReport" class="section premium-report hidden">
+  <div class="premium-head">
+    <span class="premium-badge">PREMIUM COMPLETE READING</span>
+    <h2><span id="reportName">你的</span>完整人生解析</h2>
+    <p>這一區為付費完整版內容。建議搭配實際生活經驗閱讀，而不是把任何玄學系統當成命定答案。</p>
+    <button id="printReport" class="outline" type="button">列印／儲存 PDF</button>
+  </div>
+  <div class="premium-grid">
+    <article class="premium-panel"><span class="eyebrow">13 · RELATIONSHIP BLUEPRINT</span><h3>你的關係藍圖</h3><div class="premium-split"><div><small>適合你的綠旗</small><p id="loveGreen"></p></div><div><small>需要留意的紅旗</small><p id="loveRed"></p></div></div><div class="premium-callout"><small>感情使用說明</small><p id="loveManual"></p></div></article>
+    <article class="premium-panel"><span class="eyebrow">14 · CAREER BLUEPRINT</span><h3>你的職涯使用說明</h3><p id="workMode"></p><div class="premium-callout"><small>適合你的工作環境</small><p id="workEnvironment"></p></div></article>
+    <article class="premium-panel"><span class="eyebrow">15 · WEALTH BLUEPRINT</span><h3>你的財富藍圖</h3><div id="wealthTop3" class="wealth-cards"></div><div class="premium-callout warning"><small>最需要避免的金錢盲點</small><p id="moneyBlind"></p></div></article>
+    <article class="premium-panel"><span class="eyebrow">16 · SHADOW & BREAKTHROUGH</span><h3>人生反覆卡住你的地方</h3><div class="premium-split"><div><small>陰影模式</small><p id="shadowPattern"></p></div><div><small>突破練習</small><p id="breakthrough"></p></div></div></article>
+    <article class="premium-panel"><span class="eyebrow">17 · INNER CHILD</span><h3>內在小孩真正想告訴你的事</h3><p id="innerChild"></p></article>
+    <article class="premium-panel mystic-letter"><span class="eyebrow">18 · AKASHIC-STYLE LETTER</span><h3>一封象徵性的靈魂信</h3><p id="akashicLetter"></p><div class="note">此內容是創意反思／靈性書寫，不宣稱能實際讀取或驗證阿卡西紀錄。</div></article>
+    <article class="premium-panel full"><span class="eyebrow">19 · 2027 QUARTERLY MAP</span><h3>2027 四季導航</h3><div id="quarterGuide" class="quarter-grid"></div><div class="premium-callout"><small>年度提醒</small><p>把年度與月份當成整理注意力的工具，不要用它取代合約審閱、醫療、財務或重大人生決策的實際資訊。</p></div></article>
+    <article class="premium-panel full action-plan"><span class="eyebrow">20 · ACTION PLAN</span><h3>把解析真的變成人生行動</h3><div class="action-grid"><div><b>30 DAYS</b><p id="action30"></p></div><div><b>90 DAYS</b><p id="action90"></p></div><div><b>365 DAYS</b><p id="action365"></p></div></div></article>
   </div>
 </section>
 </main>
@@ -399,6 +501,8 @@ document.querySelector('#app').innerHTML = `
 document.querySelector('#city').addEventListener('change', e=>{
   document.querySelector('#customFields').classList.toggle('hidden',e.target.value!=='custom');
 });
+
+document.querySelector('#printReport').addEventListener('click',()=>window.print());
 
 document.querySelector('#birthForm').addEventListener('submit', async e=>{
   e.preventDefault();
@@ -490,9 +594,25 @@ document.querySelector('#birthForm').addEventListener('submit', async e=>{
     akashicDeep.textContent=deep.akashic; year2027Deep.textContent=deep.year2027; monthGuide.innerHTML=monthGuideFn(date);
     fiveTakeaways.innerHTML=[`你是：${life.name}，核心組合 ${sun} × ${moon} × ${rising}` ,`愛情：需要${({牡羊座:'直接回應',金牛座:'穩定安心',雙子座:'交流互動',巨蟹座:'情緒承接',獅子座:'肯定珍惜',處女座:'可靠細節',天秤座:'平衡陪伴',天蠍座:'忠誠深度',射手座:'自由成長',摩羯座:'承諾可靠',水瓶座:'空間與共鳴',雙魚座:'共感溫柔'}[moon]||'理解與尊重')}`,`事業：優先累積可被看見、可重複交付的專業價值`,`金錢：先做強一個核心收入，再延伸多元收入`,`2027：個人流年 ${py2027}，把年度主題當導航，不當命定`].map((x,i)=>`<div><b>0${i+1}</b><span>${esc(x)}</span></div>`).join('');
 
+    const premium=premiumBundle({lifeNum:lp,life,moon,rising,hdType:typeName(hd),authority:authorityName(hd),strategy,dm,py2027});
+    const client=document.querySelector('#clientName')?.value?.trim();
+    reportName.textContent=client ? `${client}的` : '你的';
+    loveGreen.textContent=premium.green; loveRed.textContent=premium.red;
+    loveManual.textContent=`你的月亮是${moon}、上升是${rising}。關係裡比起猜測對方心意，更適合建立「需求可以說、界線可以談、承諾看行動」的互動方式。`;
+    workMode.textContent=premium.workMode;
+    workEnvironment.textContent=`優先選擇能累積作品、專業與自主性的環境。以${authorityName(hd)}為自我觀察框架，重大決定不要只因外界催促，留意自己的決策節奏。`;
+    wealthTop3.innerHTML=premium.wealth.map((x,i)=>`<div><b>0${i+1}</b><span>${esc(x)}</span></div>`).join('');
+    moneyBlind.textContent=premium.moneyBlind;
+    shadowPattern.textContent=premium.shadow; breakthrough.textContent=premium.breakthrough;
+    innerChild.textContent=premium.innerChild; akashicLetter.textContent=premium.akashicLetter;
+    quarterGuide.innerHTML=premium.quarters.map((x,i)=>`<div><small>Q${i+1}</small><strong>${esc(x)}</strong></div>`).join('');
+    action30.textContent=premium.action30; action90.textContent=premium.action90; action365.textContent=premium.action365;
+    premiumReport.classList.remove('hidden');
+
+
     results.classList.remove('hidden');
     results.scrollIntoView({behavior:'smooth'});
-    status.textContent=`完成｜出生地：${place.label}`;
+    status.textContent=`Premium 完整解析完成｜出生地：${place.label}`;
   }catch(err){
     console.error(err);
     status.textContent='排盤時發生錯誤。請確認資料格式；若部署後仍出現此訊息，可查看瀏覽器 Console 取得錯誤內容。';

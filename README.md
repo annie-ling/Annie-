@@ -1,25 +1,23 @@
-# 玄學人格研究所 V3.1｜iPhone 覆蓋版
+# 玄學人格研究所 V5 Premium｜付費完整解析版
 
-這版是 V3 的修正版，直接覆蓋原本 Repository 根目錄檔案即可。
+這是給付費客戶看的完整報告版本。
 
-## V3.1 修正
-- 修正星盤「主導元素」出現 `[object Object]`
-- 八字日主改為繁中，例如 `庚金`，不再出現 `(geng)`
-- Human Design 策略繁中化，例如 `Wait to Respond → 等待回應`
-- 新增生命靈數、星盤、人類圖、八字的「深度解析」
-- 保留原有 GitHub Actions，不需要重新建立 Pages workflow
+## 新增內容
+- 關係藍圖：綠旗、紅旗、感情使用說明
+- 職涯藍圖：適合工作模式與環境
+- 財富藍圖：前三種變現方式＋金錢盲點
+- 人生陰影模式＋突破練習
+- 內在小孩訊息
+- 阿卡西式象徵性靈魂信
+- 2027 四季導航＋原有 12 月導航
+- 30／90／365 天行動計畫
+- 列印／儲存 PDF 按鈕
+- 報告姓名／暱稱欄位
 
-## iPhone 更新方式
-把以下 6 個檔案上傳到 Repository 根目錄並覆蓋同名檔案：
-- index.html
-- main.js
-- style.css
-- package.json
-- vite.config.js
-- README.md
+## GitHub 更新
+把本 ZIP 解壓縮後的 6 個檔案上傳到 Repository 根目錄覆蓋同名檔案。`.github/workflows/pages.yml` 不要動。
 
-`.github/workflows/pages.yml` 不需要動。
+## 重要：付費保護
+這個版本是「付費報告內容本身」，不是安全的付款鎖。GitHub Pages 是公開靜態網站，若把完整版直接部署在公開 Repository，知道網址的人仍可能存取內容。真正收費時，建議用 Beacons／Stripe／其他付款頁收款，再以私密 PDF、受權限保護頁面或有後端驗證的會員頁交付。
 
-## 更新後
-Commit 之後 GitHub Actions 會自動重新部署。
-看到綠燈後，重新整理 GitHub Pages 網站即可。
+玄學、占星、人類圖、八字、水晶及阿卡西式內容皆定位為文化／娛樂／自我探索，不應取代醫療、心理、法律、投資或其他專業判斷。
