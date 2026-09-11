@@ -542,20 +542,38 @@ function apiConfigured(){
 
 async function callPremiumRpc(fn, payload){
   if(!apiConfigured()) throw new Error('Premium 授權後端尚未設定');
-  const res=await fetch(`${PREMIUM_API.url}/rest/v1/rpc/${fn}`,{
-    method:'POST',
-    headers:{
-      'Content-Type':'application/json',
-      'apikey':PREMIUM_API.anonKey,
-      'Authorization':`Bearer ${PREMIUM_API.anonKey}`
-    },
-    body:JSON.stringify(payload)
-  });
-  if(!res.ok){
-    const txt=await res.text();
-    throw new Error(txt || `授權服務錯誤 ${res.status}`);
+
+  let res;
+  try{
+    res=await fetch(`${PREMIUM_API.url}/rest/v1/rpc/${fn}`,{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+        'Accept':'application/json',
+        'apikey':PREMIUM_API.anonKey
+      },
+      body:JSON.stringify(payload)
+    });
+  }catch(networkErr){
+    throw new Error(`無法連到 Supabase：${networkErr?.message || 'Network error'}`);
   }
-  return await res.json();
+
+  const raw=await res.text();
+  let data=null;
+  if(raw){
+    try{ data=JSON.parse(raw); }
+    catch{ data=raw; }
+  }
+
+  if(!res.ok){
+    const detail =
+      (data && typeof data === 'object' && (data.message || data.details || data.hint || data.code))
+      || (typeof data === 'string' ? data : '')
+      || `HTTP ${res.status}`;
+    throw new Error(`Supabase ${res.status}：${detail}`);
+  }
+
+  return data;
 }
 
 function setPremiumState(unlocked, message=''){
@@ -599,18 +617,18 @@ document.querySelector('#unlockPremium').addEventListener('click',async()=>{
   msg.textContent='正在驗證你的專屬代碼…';
   try{
     const result=await callPremiumRpc('activate_premium_code',{p_code:code,p_device_token:getDeviceToken()});
-    const ok=result?.ok === true;
+    const ok=result?.success === true || result?.ok === true;
     if(ok){
       setPremiumState(true,'✓ 解鎖成功！此裝置已綁定 Premium 授權。');
       input.value='';
       if(premiumReady) document.querySelector('#premiumReport').scrollIntoView({behavior:'smooth'});
     }else{
       const messages={invalid:'解鎖碼不存在，請確認是否輸入正確。',expired:'此解鎖碼已過期，請透過 LINE 聯絡。',used:'此解鎖碼已達使用次數上限。',inactive:'此解鎖碼目前已停用。'};
-      setPremiumState(false,messages[result?.reason] || '無法啟用此代碼，請透過 LINE 聯絡。');
+      setPremiumState(false,result?.message || messages[result?.reason] || '無法啟用此代碼，請透過 LINE 聯絡。');
     }
   }catch(err){
     console.error(err);
-    setPremiumState(false,'驗證服務暫時無法連線，請稍後再試或透過 LINE 聯絡。');
+    setPremiumState(false,`驗證失敗：${err?.message || '未知錯誤'}`);
   }finally{
     btn.disabled=false;
     btn.textContent='解鎖完整報告';
