@@ -215,6 +215,32 @@ function baziDeepText(dm){
   return `你的日主是${dm.stem}${dm.element}。在五行象徵中，「${dm.element}」常與${themes[dm.element]||'特定性格主題'}連結。這不代表單看日主就能決定整張命盤，仍需要搭配四柱、旺衰、節氣與不同流派的判讀。`;
 }
 
+
+function deepProfileBundle({life,sun,moon,rising,hdType,authority,dm,py2027}){
+  const moneyByLife={
+    1:['個人品牌／主理人收入','專案型服務','領導與顧問型收入'],2:['陪伴服務／客戶經營','合作分潤','社群與關係型收入'],3:['內容創作／自媒體','設計與美感商品','課程／表達型收入'],4:['流程與營運服務','長期型專業服務','系統化數位商品'],5:['行銷／業務／流量變現','跨領域接案','彈性型數位收入'],6:['美感與生活服務','教育／陪伴／療癒型內容','個人品牌與信任型銷售'],7:['研究／知識產品','顧問／分析','深度內容與專業訂閱'],8:['商業經營／管理','高客單顧問與成交','資源整合型收入'],9:['內容／教育／公益影響力','創意與文化工作','跨國或社群型收入'],11:['創意內容／啟發型品牌','教學與社群','概念型數位商品'],22:['品牌／平台／系統建構','團隊與專案管理','可規模化商品'],33:['教育／陪伴服務','療癒與美感品牌','社群信任型收入']};
+  const loveNeed={牡羊座:'直接與有行動力的回應',金牛座:'穩定、可預期與身體感的安心',雙子座:'交流、好奇與精神上的互動',巨蟹座:'情緒被接住與家的安全感',獅子座:'被珍惜、肯定與真心看見',處女座:'細節、可靠與實際照顧',天秤座:'尊重、平衡與有品質的陪伴',天蠍座:'深度、忠誠與真實',射手座:'自由、成長與共同探索',摩羯座:'承諾、責任與長期可靠',水瓶座:'理解差異、空間與思想共鳴',雙魚座:'共感、浪漫與溫柔連結'};
+  const workByElement={木:'成長、教育、企劃與培育',火:'曝光、內容、行銷與行動型工作',土:'營運、管理、服務與長期累積',金:'策略、審美、整理、判斷與專業化',水:'溝通、流量、跨域、研究與彈性工作'};
+  const challengeByLife={1:'容易把獨立變成凡事自己扛；課題是合作而不失去主導權。',2:'容易過度讀空氣、害怕關係失衡；課題是把自己的需要說清楚。',3:'靈感很多但容易分散；課題是持續輸出，不靠情緒決定是否行動。',4:'容易因求穩而卡在熟悉環境；課題是建立秩序後仍保留變動空間。',5:'容易因追求自由而頻繁換方向；課題是讓變化服務於一條長期主線。',6:'容易把責任、照顧與愛綁在一起；課題是不以過度付出證明價值。',7:'容易想得比做得多；課題是允許不確定，讓實際經驗補完答案。',8:'容易把成果等同自我價值；課題是學會掌握資源，而不是被成敗掌握。',9:'容易捨不得結束人事物；課題是完成、放下，讓新的循環進來。',11:'敏銳度高也容易過載；課題是把直覺落到具體節奏與界線。',22:'願景很大、標準也高；課題是拆小、持續，而不是一次做到完美。',33:'容易成為別人的情緒支柱；課題是陪伴但不拯救。'};
+  const y={1:'開新局：主動選擇比等待答案重要。',2:'關係與合作：放慢速度，辨認真正值得長期同行的人。',3:'曝光與表達：作品、社群、學習成果更值得被推出去。',4:'打地基：財務、流程、健康作息與工作制度要穩。',5:'轉換與突破：機會變多，但避免因焦躁做出高風險決定。',6:'承諾與關係：感情、家庭與責任重新排序。',7:'沉澱與專精：適合進修、研究與重新校準方向。',8:'成果與金錢：談價格、權責、收入結構時更要清楚界線。',9:'收尾與釋放：結束不再適合的模式，替下一輪留空間。'}[py2027];
+  return {
+    identity:`你不是單一標籤型的人。${sun}讓你在核心認同上有自己的方向，${moon}顯示你真正需要的安全感是「${loveNeed[moon]||'被理解與被尊重'}」，${rising}則是別人最先感受到的外在氣質。生命靈數的「${life.name}」主題，會讓你反覆學習如何把天賦變成可持續的生活方式。`,
+    love:`感情裡，你真正需要的不是只有心動，而是${loveNeed[moon]||'穩定的理解'}。你可能會先照顧關係、觀察對方，再決定自己要不要完全打開。適合你的關係，是能尊重你的節奏、願意溝通，也不要求你用犧牲自己來證明愛。當你開始悶著不說、替對方承擔太多，通常就是界線需要重新調整的訊號。`,
+    career:`你的事業適合從「你能持續提供什麼價值」出發。以日主${dm.stem}${dm.element}的象徵來看，可優先探索${workByElement[dm.element]||'能累積專業與影響力的工作'}；搭配${hdType}的決策節奏，比起只追逐熱門職業，更重要的是找到能讓你持續回應、累積作品與建立自主性的模式。`,
+    money:(moneyByLife[Object.keys(lifeProfiles).find(k=>lifeProfiles[k]===life)]||['專業服務','內容商品','個人品牌']).map((x,i)=>`${i+1}. ${x}`).join('　'),
+    moneyText:`你比較適合把「能力＋信任＋可重複交付」變成收入，而不是只靠工時換錢。先建立一個最能證明價值的核心服務，再延伸成內容、數位商品或合作收入，通常比同時做很多變現方式更容易累積。任何投資或財務決策仍應依實際風險、現金流與專業資訊判斷。`,
+    challenge:challengeByLife[Object.keys(lifeProfiles).find(k=>lifeProfiles[k]===life)]||'人生課題通常出現在界線、選擇與自我價值之間。',
+    akashic:`如果把「阿卡西」當作一種象徵性的靈魂書寫，而不是可驗證的超自然紀錄，你此刻的主題可以寫成：你不需要一直證明自己夠好，真正要學的是辨認什麼值得投入、什麼應該放下。你的敏感、責任感與直覺可以成為天賦，但前提是它們不再以耗盡自己為代價。`,
+    year2027:`你的 2027 個人流年為 ${py2027}。年度主題：${y} 這不是事件預言，而是一個年度自我觀察框架。尤其在簽約、轉職、創業、感情承諾與大額金錢決策上，仍要回到真實條件，不要只依命理結果決定。`
+  };
+}
+
+function monthGuideFn(date, year=2027){
+  const [,m,d]=date.split('-').map(Number); const base=reduceLife(sumDigits(m)+sumDigits(d)+sumDigits(year));
+  const labels={1:'啟動・主動',2:'合作・耐心',3:'曝光・表達',4:'整理・打底',5:'變動・嘗試',6:'關係・責任',7:'沉澱・學習',8:'成果・財務',9:'收尾・釋放'};
+  return Array.from({length:12},(_,i)=>{let n=base+i+1;while(n>9)n=sumDigits(n);return `<div><small>${i+1}月</small><strong>${n}</strong><span>${labels[n]}</span></div>`}).join('');
+}
+
 document.querySelector('#app').innerHTML = `
 <div class="stars"></div>
 <header class="hero">
@@ -344,6 +370,17 @@ document.querySelector('#app').innerHTML = `
       <h3>你的五術交叉摘要</h3>
       <p id="synthesis"></p>
     </article>
+
+    <article class="panel synthesis deep-life">
+      <span class="eyebrow">06 · CORE IDENTITY</span><h3>你天生是什麼樣的人？</h3><p id="identityDeep"></p>
+    </article>
+    <article class="panel"><span class="eyebrow">07 · LOVE</span><h3>感情模式與真正需要的愛</h3><p id="loveDeep"></p></article>
+    <article class="panel"><span class="eyebrow">08 · CAREER</span><h3>事業天賦與適合的舞台</h3><p id="careerDeep"></p></article>
+    <article class="panel synthesis"><span class="eyebrow">09 · MONEY</span><h3>你比較適合賺什麼錢？</h3><div class="money-list" id="moneyModes"></div><p id="moneyDeep"></p></article>
+    <article class="panel"><span class="eyebrow">10 · LIFE LESSON</span><h3>人生容易遇到的挑戰</h3><p id="challengeDeep"></p></article>
+    <article class="panel"><span class="eyebrow">11 · AKASHIC-STYLE REFLECTION</span><h3>阿卡西式靈魂探索</h3><p id="akashicDeep"></p><div class="note">此區是象徵性自我探索文字，不宣稱能讀取或驗證超自然的「阿卡西紀錄」。</div></article>
+    <article class="panel synthesis year-panel"><span class="eyebrow">12 · 2027 NAVIGATION</span><h3>2027 年度導航</h3><p id="year2027Deep"></p><div class="month-grid" id="monthGuide"></div></article>
+    <article class="panel synthesis takeaway"><span class="eyebrow">REMEMBER THESE 5 THINGS</span><h3>如果你只記得這份報告的 5 件事</h3><div id="fiveTakeaways"></div></article>
   </div>
 </section>
 
@@ -383,7 +420,7 @@ document.querySelector('#birthForm').addEventListener('submit', async e=>{
     const [year,month,day]=date.split('-').map(Number);
     const [h,m]=time.split(':').map(Number);
 
-    const lp=lifePath(date), life=lifeProfiles[lp], py=personalYear(date,2026);
+    const lp=lifePath(date), life=lifeProfiles[lp], py=personalYear(date,2026), py2027=personalYear(date,2027);
     const astro=calculateAstrology(date,hour,place.tz,place.lat,place.lon);
     const hd=calculateHumanDesign(date,hour,place.tz);
     const bazi=calculateBaziChart({
@@ -446,6 +483,12 @@ document.querySelector('#birthForm').addEventListener('submit', async e=>{
     crystalText.textContent=`依你的日主五行與生命靈數，這版推薦以「${crystalTheme}」作為象徵性主題。你可以把 ${crystalName} 當作日常提醒物，而不是具有保證效果的能量工具。`;
 
     synthesis.textContent=`你的生命靈數是 ${lp} 號 ${life.name}；星盤三巨頭為 ${sun}、${moon}、${rising}；人類圖為 ${typeName(hd)}／${authorityName(hd)}／${profile}，策略是「${strategy}」；八字日主為 ${dm.stem}${dm.element}。把五套系統放在一起時，最值得觀察的不是「哪一個標籤最像你」，而是哪些主題反覆出現：你的行動方式、情緒需求、決策習慣、關係界線，以及你想如何把天賦落到生活裡。`;
+
+    const deep=deepProfileBundle({life,sun,moon,rising,hdType:typeName(hd),authority:authorityName(hd),dm,py2027});
+    identityDeep.textContent=deep.identity; loveDeep.textContent=deep.love; careerDeep.textContent=deep.career;
+    moneyModes.textContent=deep.money; moneyDeep.textContent=deep.moneyText; challengeDeep.textContent=deep.challenge;
+    akashicDeep.textContent=deep.akashic; year2027Deep.textContent=deep.year2027; monthGuide.innerHTML=monthGuideFn(date);
+    fiveTakeaways.innerHTML=[`你是：${life.name}，核心組合 ${sun} × ${moon} × ${rising}` ,`愛情：需要${({牡羊座:'直接回應',金牛座:'穩定安心',雙子座:'交流互動',巨蟹座:'情緒承接',獅子座:'肯定珍惜',處女座:'可靠細節',天秤座:'平衡陪伴',天蠍座:'忠誠深度',射手座:'自由成長',摩羯座:'承諾可靠',水瓶座:'空間與共鳴',雙魚座:'共感溫柔'}[moon]||'理解與尊重')}`,`事業：優先累積可被看見、可重複交付的專業價值`,`金錢：先做強一個核心收入，再延伸多元收入`,`2027：個人流年 ${py2027}，把年度主題當導航，不當命定`].map((x,i)=>`<div><b>0${i+1}</b><span>${esc(x)}</span></div>`).join('');
 
     results.classList.remove('hidden');
     results.scrollIntoView({behavior:'smooth'});
