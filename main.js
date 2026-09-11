@@ -20,18 +20,18 @@ const cities = {
 };
 
 const lifeProfiles = {
-  1:{name:'開創者',keys:['獨立','行動','領導'],text:'你的人生主題，是相信自己的方向並主動開路。',crystal:'太陽石'},
-  2:{name:'共感者',keys:['感受','合作','關係'],text:'你很會感受人與氛圍，課題是溫柔待人也保有界線。',crystal:'月光石'},
-  3:{name:'表達者',keys:['創意','表達','魅力'],text:'你的能量在創作、分享與被看見時最容易流動。',crystal:'黃水晶'},
-  4:{name:'建構者',keys:['穩定','秩序','執行'],text:'你的力量來自長期累積，把想法變成可持續的系統。',crystal:'煙水晶'},
-  5:{name:'自由者',keys:['自由','變化','體驗'],text:'你透過體驗世界認識自己，自由與彈性是重要主題。',crystal:'海藍寶'},
-  6:{name:'療癒者',keys:['愛','責任','美感'],text:'你自然會照顧別人，也要記得把自己放回愛的範圍裡。',crystal:'粉晶'},
-  7:{name:'探索者',keys:['洞察','思考','內在'],text:'你不滿足於表面答案，深度與研究是你的重要天賦。',crystal:'紫水晶'},
-  8:{name:'成就者',keys:['事業','資源','成果'],text:'你的人生常與成果、金錢和影響力的學習有關。',crystal:'虎眼石'},
-  9:{name:'理想者',keys:['共感','完成','療癒'],text:'你容易感受到更大的故事，也需要學習適時完成與放下。',crystal:'拉長石'},
-  11:{name:'直覺啟發者',keys:['直覺','靈感','啟發'],text:'11 常被視為大師數，課題是把高度敏銳的靈感真正落地。',crystal:'紫水晶'},
-  22:{name:'築夢實踐者',keys:['願景','建構','影響'],text:'22 常被視為築夢型大師數，適合把大願景拆成可執行的步驟。',crystal:'煙水晶'},
-  33:{name:'慈愛導師',keys:['慈愛','療癒','影響'],text:'33 常被視為服務與療癒型大師數，界線與自我照顧同樣重要。',crystal:'粉晶'}
+  1:{name:'開創者',keys:['獨立','行動','領導'],text:'你的人生主題，是相信自己的方向並主動開路。',deep:'當你願意先行動、再修正，你的影響力會比等待完美時機更快被看見。你需要練習的是「相信自己」而不是「凡事只能靠自己」。',crystal:'太陽石'},
+  2:{name:'共感者',keys:['感受','合作','關係'],text:'你很會感受人與氛圍，課題是溫柔待人也保有界線。',deep:'你很容易先感受到別人的需要，因此真正的成長不是變得不敏感，而是能分辨「這是我的感受，還是別人的情緒」。',crystal:'月光石'},
+  3:{name:'表達者',keys:['創意','表達','魅力'],text:'你的能量在創作、分享與被看見時最容易流動。',deep:'你有把抽象感受變成文字、畫面、故事或氣氛的能力。持續輸出比偶爾爆發靈感更能讓天賦累積成價值。',crystal:'黃水晶'},
+  4:{name:'建構者',keys:['穩定','秩序','執行'],text:'你的力量來自長期累積，把想法變成可持續的系統。',deep:'你真正擅長的不是做得最快，而是把事情做得穩、做得久。當你願意保留一些彈性，穩定會變成你的底氣，而不是限制。',crystal:'煙水晶'},
+  5:{name:'自由者',keys:['自由','變化','體驗'],text:'你透過體驗世界認識自己，自由與彈性是重要主題。',deep:'你需要新鮮感與選擇權，但自由不等於一直換方向。當你能在變化裡保留一條主線，人生會更有累積感。',crystal:'海藍寶'},
+  6:{name:'療癒者',keys:['愛','責任','美感'],text:'你自然會照顧別人，也要記得把自己放回愛的範圍裡。',deep:'你容易把愛表現在照顧、承擔與替別人多想一步。真正重要的課題，是不再用過度付出證明自己的價值。',crystal:'粉晶'},
+  7:{name:'探索者',keys:['洞察','思考','內在'],text:'你不滿足於表面答案，深度與研究是你的重要天賦。',deep:'你需要理解事情背後的原因，也需要獨處整理。別讓思考變成延遲行動，有些答案只有真正走出去才會出現。',crystal:'紫水晶'},
+  8:{name:'成就者',keys:['事業','資源','成果'],text:'你的人生常與成果、金錢和影響力的學習有關。',deep:'你對成果與資源有敏銳度。當你不再把自我價值綁在成敗上，反而更能做出成熟、長期且有影響力的選擇。',crystal:'虎眼石'},
+  9:{name:'理想者',keys:['共感','完成','療癒'],text:'你容易感受到更大的故事，也需要學習適時完成與放下。',deep:'你很容易對人、故事與情緒產生深度連結。你的課題不是變得冷淡，而是知道什麼時候該留、什麼時候該結束。',crystal:'拉長石'},
+  11:{name:'直覺啟發者',keys:['直覺','靈感','啟發'],text:'11 常被視為大師數，課題是把高度敏銳的靈感真正落地。',deep:'你可能常先感受到答案，再慢慢找到理由。當靈感有了具體行動、界線與節奏，它才真正會成為影響力。',crystal:'紫水晶'},
+  22:{name:'築夢實踐者',keys:['願景','建構','影響'],text:'22 常被視為築夢型大師數，適合把大願景拆成可執行的步驟。',deep:'你容易看見更大的可能性，但也可能因此對自己要求過高。真正的力量是把大願景拆成今天做得到的一小步。',crystal:'煙水晶'},
+  33:{name:'慈愛導師',keys:['慈愛','療癒','影響'],text:'33 常被視為服務與療癒型大師數，界線與自我照顧同樣重要。',deep:'你容易自然承擔陪伴與照顧的位置。當你不再把拯救別人當成責任，你的愛反而會更穩定、更長久。',crystal:'粉晶'}
 };
 
 const yearText = {
@@ -50,6 +50,13 @@ const signZh = {
   Aries:'牡羊座', Taurus:'金牛座', Gemini:'雙子座', Cancer:'巨蟹座',
   Leo:'獅子座', Virgo:'處女座', Libra:'天秤座', Scorpio:'天蠍座',
   Sagittarius:'射手座', Capricorn:'摩羯座', Aquarius:'水瓶座', Pisces:'雙魚座'
+};
+
+const signElement = {
+  Aries:'火', Leo:'火', Sagittarius:'火',
+  Taurus:'土', Virgo:'土', Capricorn:'土',
+  Gemini:'風', Libra:'風', Aquarius:'風',
+  Cancer:'水', Scorpio:'水', Pisces:'水'
 };
 
 const hdZh = {
@@ -71,13 +78,41 @@ const hdZh = {
   'Quadruple Split':'四分人'
 };
 
-const elementZh = {wood:'木',fire:'火',earth:'土',metal:'金',water:'水'};
+const strategyZh = {
+  'Wait to Respond':'等待回應',
+  'To Respond':'等待回應',
+  'Respond':'等待回應',
+  'Wait for the Invitation':'等待邀請',
+  'Wait for Invitation':'等待邀請',
+  'Inform':'先告知再行動',
+  'Inform Before Acting':'先告知再行動',
+  'Wait a Lunar Cycle':'等待一個月亮週期',
+  'Wait for a Lunar Cycle':'等待一個月亮週期'
+};
+
+const stemZhByPinyin = {
+  jia:'甲', yi:'乙', bing:'丙', ding:'丁', wu:'戊',
+  ji:'己', geng:'庚', xin:'辛', ren:'壬', gui:'癸'
+};
+const stemElement = {
+  '甲':'木','乙':'木','丙':'火','丁':'火','戊':'土',
+  '己':'土','庚':'金','辛':'金','壬':'水','癸':'水'
+};
+
+const elementZh = {wood:'木',fire:'火',earth:'土',metal:'金',water:'水',
+                   Wood:'木',Fire:'火',Earth:'土',Metal:'金',Water:'水',
+                   Air:'風',air:'風'};
 const elementCrystal = {
   wood:['綠東陵','成長與開展'],
   fire:['石榴石','行動與熱情'],
   earth:['黃水晶','穩定與價值感'],
   metal:['白水晶','清晰與整理'],
-  water:['海藍寶','流動與表達']
+  water:['海藍寶','流動與表達'],
+  木:['綠東陵','成長與開展'],
+  火:['石榴石','行動與熱情'],
+  土:['黃水晶','穩定與價值感'],
+  金:['白水晶','清晰與整理'],
+  水:['海藍寶','流動與表達']
 };
 
 const sumDigits = v => String(v).replace(/\D/g,'').split('').reduce((a,b)=>a+Number(b),0);
@@ -93,6 +128,7 @@ function decimalHour(time){ const [h,m]=time.split(':').map(Number); return h + 
 function esc(v=''){return String(v).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));}
 function zhSign(obj){return signZh[obj?.sign?.name] || obj?.sign?.name || '—';}
 function degree(obj){return obj?.degree ?? '—';}
+
 function pickCity(){
   const key=document.querySelector('#city').value;
   if(key==='custom'){
@@ -105,17 +141,86 @@ function pickCity(){
   }
   return cities[key];
 }
-function baziPillar(p){ if(!p)return '—'; return `${p.stem||''}${p.branch||''}` || p.ganZhi || '—'; }
+
+function baziPillar(p){
+  if(!p)return '—';
+  if(p.stem || p.branch) return `${p.stem||''}${p.branch||''}`;
+  if(p.ganZhi) return p.ganZhi;
+  return '—';
+}
+
 function typeName(hd){return hdZh[hd?.type?.name] || hd?.type?.name || '—';}
 function authorityName(hd){return hdZh[hd?.authority?.name] || hd?.authority?.name || hdZh[hd?.type?.authority] || hd?.type?.authority || '—';}
 function definitionName(hd){return hdZh[hd?.definition] || hd?.definition || '—';}
+function strategyName(hd){
+  const raw = hd?.type?.strategy || hd?.strategy || '—';
+  return strategyZh[raw] || raw;
+}
+
+function getDayMaster(bazi){
+  const rawStem = bazi?.dayMaster?.stem || '';
+  const pinyin = String(bazi?.dayMaster?.pinyin || '').toLowerCase();
+  const stem = rawStem || stemZhByPinyin[pinyin] || '';
+  const rawEl = bazi?.dayMaster?.element || '';
+  const element = elementZh[rawEl] || stemElement[stem] || rawEl || '—';
+  return {stem: stem || '—', element};
+}
+
+function normalizeElementValue(v){
+  if(v == null) return '';
+  if(typeof v === 'string') return elementZh[v] || elementZh[v.toLowerCase?.()] || v;
+  if(typeof v === 'object'){
+    const candidate = v.name ?? v.element ?? v.type ?? v.key ?? v.label ?? v.value;
+    if(candidate != null) return normalizeElementValue(candidate);
+  }
+  return '';
+}
+
+function dominantElementText(astro){
+  const direct = normalizeElementValue(astro?.balance?.dominantElement);
+  if(direct && direct !== '[object Object]') return direct;
+
+  const els = astro?.balance?.elements;
+  if(els && typeof els === 'object'){
+    const pairs = Object.entries(els).map(([k,v])=>{
+      const score = typeof v === 'number' ? v :
+        (typeof v === 'object' ? Number(v.score ?? v.value ?? v.count ?? 0) : 0);
+      return [k, score];
+    }).filter(([,v])=>Number.isFinite(v));
+    if(pairs.length){
+      pairs.sort((a,b)=>b[1]-a[1]);
+      const z = normalizeElementValue(pairs[0][0]);
+      if(z) return z;
+    }
+  }
+
+  // Last-resort fallback using the Big Three signs only.
+  const names=[astro?.sun?.sign?.name,astro?.moon?.sign?.name,astro?.rising?.sign?.name].filter(Boolean);
+  const counts={火:0,土:0,風:0,水:0};
+  names.forEach(n=>{const e=signElement[n]; if(e) counts[e]++;});
+  const best=Object.entries(counts).sort((a,b)=>b[1]-a[1])[0];
+  return best?.[1] ? `${best[0]}（三巨頭）` : '—';
+}
+
+function astroDeepText(sun,moon,rising,dom){
+  return `你的太陽是${sun}、月亮是${moon}、上升是${rising}。可以把太陽理解成你想成為誰，月亮是你在安全狀態下真正需要什麼，上升則像你進入世界時的第一層外在風格。主導元素顯示為「${dom}」，適合拿來觀察你習慣用什麼方式回應生活。`;
+}
+
+function hdDeepText(type,authority,profile,strategy){
+  return `你的人類圖類型是${type}，內在權威是${authority}，人生角色為${profile}，策略是「${strategy}」。在這套系統裡，比起照著頭腦硬做決定，更適合先觀察自己的身體回應與真正的決策節奏。`;
+}
+
+function baziDeepText(dm){
+  const themes={木:'成長、延伸、方向感',火:'行動、表達、熱度',土:'承載、穩定、現實感',金:'界線、判斷、整理',水:'流動、感受、適應'};
+  return `你的日主是${dm.stem}${dm.element}。在五行象徵中，「${dm.element}」常與${themes[dm.element]||'特定性格主題'}連結。這不代表單看日主就能決定整張命盤，仍需要搭配四柱、旺衰、節氣與不同流派的判讀。`;
+}
 
 document.querySelector('#app').innerHTML = `
 <div class="stars"></div>
 <header class="hero">
   <nav><div class="brand">玄學人格研究所</div><a href="#birth">開始探索 ✦</a></nav>
   <div class="hero-copy">
-    <span class="eyebrow">MYSTIC PROFILE LAB · V3</span>
+    <span class="eyebrow">MYSTIC PROFILE LAB · V3.1</span>
     <h1>五種系統，<br><em>拼出更完整的你。</em></h1>
     <p>生命靈數 × 西洋占星 × 人類圖 × 八字五行 × 水晶象徵。輸入出生資料，生成你的個人能量說明書。</p>
     <a class="primary" href="#birth">生成我的玄學人格</a>
@@ -175,7 +280,9 @@ document.querySelector('#app').innerHTML = `
   <div class="cards">
     <article class="panel feature">
       <span class="eyebrow">01 · LIFE PATH</span>
-      <h3 id="lifeTitle"></h3><p id="lifeText"></p>
+      <h3 id="lifeTitle"></h3>
+      <p id="lifeText"></p>
+      <div class="deep-box"><small>深度解析</small><p id="lifeDeep"></p></div>
       <div class="mini-grid">
         <div><small>2026 個人流年</small><strong id="pyNum"></strong><p id="pyText"></p></div>
         <div><small>關鍵字</small><strong id="lifeKeys"></strong></div>
@@ -192,6 +299,7 @@ document.querySelector('#app').innerHTML = `
       </div>
       <p id="astroText"></p>
       <div class="barline"><span>主導元素</span><b id="dominantElement"></b></div>
+      <div class="deep-box"><small>深度解析</small><p id="astroDeep"></p></div>
     </article>
 
     <article class="panel">
@@ -204,6 +312,7 @@ document.querySelector('#app').innerHTML = `
         <div><small>策略</small><strong id="hdStrategy"></strong></div>
       </div>
       <p id="hdText"></p>
+      <div class="deep-box"><small>深度解析</small><p id="hdDeep"></p></div>
     </article>
 
     <article class="panel">
@@ -220,6 +329,7 @@ document.querySelector('#app').innerHTML = `
         <div><small>日主五行</small><strong id="dmElement"></strong></div>
       </div>
       <p id="baziText"></p>
+      <div class="deep-box"><small>深度解析</small><p id="baziDeep"></p></div>
     </article>
 
     <article class="panel crystal">
@@ -257,6 +367,7 @@ document.querySelector('#birthForm').addEventListener('submit', async e=>{
   e.preventDefault();
   const status=document.querySelector('#status');
   status.textContent='正在計算你的能量地圖…';
+
   const date=document.querySelector('#date').value;
   const time=document.querySelector('#time').value;
   const gender=document.querySelector('#gender').value;
@@ -271,8 +382,8 @@ document.querySelector('#birthForm').addEventListener('submit', async e=>{
     const hour=decimalHour(time);
     const [year,month,day]=date.split('-').map(Number);
     const [h,m]=time.split(':').map(Number);
-    const lp=lifePath(date), life=lifeProfiles[lp], py=personalYear(date,2026);
 
+    const lp=lifePath(date), life=lifeProfiles[lp], py=personalYear(date,2026);
     const astro=calculateAstrology(date,hour,place.tz,place.lat,place.lon);
     const hd=calculateHumanDesign(date,hour,place.tz);
     const bazi=calculateBaziChart({
@@ -284,17 +395,19 @@ document.querySelector('#birthForm').addEventListener('submit', async e=>{
     });
 
     const sun=zhSign(astro.sun), moon=zhSign(astro.moon), rising=zhSign(astro.rising);
-    const dom=astro?.balance?.dominantElement || '—';
-    const dmEl=bazi?.dayMaster?.element || '';
-    const dmZh=elementZh[dmEl] || dmEl || '—';
+    const dom=dominantElementText(astro);
+    const dm=getDayMaster(bazi);
+    const profile=hd?.profile?.numbers || '—';
+    const strategy=strategyName(hd);
 
     cardNumber.textContent=lp;
     cardTitle.textContent=`${life.name} · ${sun}`;
-    cardSub.textContent=`月亮 ${moon}｜上升 ${rising}｜${typeName(hd)}｜日主 ${bazi?.dayMaster?.stem||''}${dmZh}`;
-    cardChips.innerHTML=[...life.keys,typeName(hd),`${dmZh}能量`].map(x=>`<span>${esc(x)}</span>`).join('');
+    cardSub.textContent=`月亮 ${moon}｜上升 ${rising}｜${typeName(hd)}｜日主 ${dm.stem}${dm.element}`;
+    cardChips.innerHTML=[...life.keys,typeName(hd),`${dm.element}能量`].map(x=>`<span>${esc(x)}</span>`).join('');
 
     lifeTitle.textContent=`生命靈數 ${lp}｜${life.name}`;
     lifeText.textContent=life.text;
+    lifeDeep.textContent=life.deep;
     pyNum.textContent=py;
     pyText.textContent=yearText[py];
     lifeKeys.textContent=life.keys.join('・');
@@ -307,29 +420,32 @@ document.querySelector('#birthForm').addEventListener('submit', async e=>{
     risingDeg.textContent=degree(astro.rising);
     dominantElement.textContent=dom;
     astroText.textContent=`太陽描述核心自我認同，月亮常用來觀察情緒與安全感，上升則反映你進入世界時的外在風格。你的組合是 ${sun} × ${moon} × ${rising}。`;
+    astroDeep.textContent=astroDeepText(sun,moon,rising,dom);
 
     hdType.textContent=typeName(hd);
     hdAuthority.textContent=authorityName(hd);
-    hdProfile.textContent=hd?.profile?.numbers || '—';
+    hdProfile.textContent=profile;
     hdDefinition.textContent=definitionName(hd);
-    hdStrategy.textContent=hd?.type?.strategy || '—';
+    hdStrategy.textContent=strategy;
     hdText.textContent=`在人類圖系統裡，你的類型是 ${typeName(hd)}，內在權威為 ${authorityName(hd)}。可把「策略＋權威」當成一套自我觀察與決策練習，而不是絕對規則。`;
+    hdDeep.textContent=hdDeepText(typeName(hd),authorityName(hd),profile,strategy);
 
     yearP.textContent=baziPillar(bazi?.pillars?.year);
     monthP.textContent=baziPillar(bazi?.pillars?.month);
     dayP.textContent=baziPillar(bazi?.pillars?.day);
     hourP.textContent=baziPillar(bazi?.pillars?.hour);
-    dayMaster.textContent=`${bazi?.dayMaster?.stem||''}${bazi?.dayMaster?.pinyin ? ` (${bazi.dayMaster.pinyin})` : ''}`;
-    dmElement.textContent=dmZh;
-    baziText.textContent=`八字以節氣與干支建立四柱。這份排盤啟用真太陽時修正；你的日主五行為「${dmZh}」。不同命理流派在日界、用神與解讀方式上可能存在差異。`;
+    dayMaster.textContent=`${dm.stem}${dm.element}`;
+    dmElement.textContent=dm.element;
+    baziText.textContent=`八字以節氣與干支建立四柱。這份排盤啟用真太陽時修正；你的日主為「${dm.stem}${dm.element}」。不同命理流派在日界、用神與解讀方式上可能存在差異。`;
+    baziDeep.textContent=baziDeepText(dm);
 
-    const cFromBazi=elementCrystal[dmEl];
+    const cFromBazi=elementCrystal[dm.element];
     const crystalName=cFromBazi?.[0] || life.crystal;
     const crystalTheme=cFromBazi?.[1] || '自我覺察';
     crystal.textContent=`推薦探索：${crystalName}`;
     crystalText.textContent=`依你的日主五行與生命靈數，這版推薦以「${crystalTheme}」作為象徵性主題。你可以把 ${crystalName} 當作日常提醒物，而不是具有保證效果的能量工具。`;
 
-    synthesis.textContent=`你的生命靈數是 ${lp} 號 ${life.name}；星盤三巨頭為 ${sun}、${moon}、${rising}；人類圖為 ${typeName(hd)}／${authorityName(hd)}／${hd?.profile?.numbers||'—'}；八字日主五行為 ${dmZh}。把五套系統放在一起時，最值得觀察的不是「哪一個標籤最像你」，而是哪些主題反覆出現：你的行動方式、情緒需求、決策習慣、關係界線，以及你想如何把天賦落到生活裡。`;
+    synthesis.textContent=`你的生命靈數是 ${lp} 號 ${life.name}；星盤三巨頭為 ${sun}、${moon}、${rising}；人類圖為 ${typeName(hd)}／${authorityName(hd)}／${profile}，策略是「${strategy}」；八字日主為 ${dm.stem}${dm.element}。把五套系統放在一起時，最值得觀察的不是「哪一個標籤最像你」，而是哪些主題反覆出現：你的行動方式、情緒需求、決策習慣、關係界線，以及你想如何把天賦落到生活裡。`;
 
     results.classList.remove('hidden');
     results.scrollIntoView({behavior:'smooth'});
