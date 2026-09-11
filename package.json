@@ -1,7 +1,7 @@
 {
-  "name": "mystic-profile-v3",
+  "name": "mystic-profile-v6-premium-auth",
   "private": true,
-  "version": "3.0.0",
+  "version": "6.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",

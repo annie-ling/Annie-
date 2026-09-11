@@ -1,6 +1,7 @@
 import './style.css';
 import { calculateAstrology, calculateHumanDesign } from 'natalengine';
 import { calculateBaziChart } from '@openfate/bazi-engine';
+import { PREMIUM_API } from './premium-config.js';
 
 const cities = {
   kaohsiung:{label:'高雄',lat:22.6273,lon:120.3014,tz:8},
@@ -483,7 +484,12 @@ document.querySelector('#app').innerHTML = `
     <p>完整版本包含感情關係藍圖、事業與財富模式、人生挑戰、內在小孩、阿卡西式靈魂探索、2027 四季導航與行動計畫。</p>
     <div class="unlock-points"><span>♡ 感情深度解析</span><span>✦ 事業／適合賺什麼錢</span><span>☾ 2027 年度導航</span><span>◇ 完整 PDF 人生報告</span></div>
     <a class="line-pay" href="https://line.me/ti/p/Vfr2_tJJK7" target="_blank" rel="noopener">加入 LINE｜詢問付費完整解析</a>
-    <p class="unlock-note">加入後請傳送「完整解析＋你的姓名／暱稱」，確認方案與付款後提供完整報告。</p>
+    <p class="unlock-note">加入後請傳送「完整解析＋你的姓名／暱稱」。付款確認後，我會提供你的專屬解鎖碼。</p>
+    <div class="code-unlock">
+      <label for="premiumCode">已付款？輸入解鎖碼</label>
+      <div class="code-row"><input id="premiumCode" type="text" autocomplete="off" placeholder="輸入解鎖碼"><button id="unlockPremium" type="button">解鎖完整報告</button></div>
+      <p id="unlockStatus" class="unlock-status">付款完成後，請輸入你在 LINE 收到的專屬解鎖碼。每組代碼可限制使用次數。</p>
+    </div>
   </div>
 </section>
 
@@ -513,7 +519,100 @@ document.querySelector('#city').addEventListener('change', e=>{
   document.querySelector('#customFields').classList.toggle('hidden',e.target.value!=='custom');
 });
 
+let premiumReady=false;
+let premiumUnlocked=false;
+
+function getDeviceToken(){
+  let token=localStorage.getItem('mysticPremiumDeviceToken');
+  if(!token){
+    token=(crypto?.randomUUID?.() || `dev-${Date.now()}-${Math.random().toString(36).slice(2)}`);
+    localStorage.setItem('mysticPremiumDeviceToken',token);
+  }
+  return token;
+}
+
+function apiConfigured(){
+  return PREMIUM_API?.url && PREMIUM_API?.anonKey && !PREMIUM_API.url.includes('YOUR_PROJECT') && !PREMIUM_API.anonKey.includes('YOUR_');
+}
+
+async function callPremiumRpc(fn, payload){
+  if(!apiConfigured()) throw new Error('Premium 授權後端尚未設定');
+  const res=await fetch(`${PREMIUM_API.url}/rest/v1/rpc/${fn}`,{
+    method:'POST',
+    headers:{
+      'Content-Type':'application/json',
+      'apikey':PREMIUM_API.anonKey,
+      'Authorization':`Bearer ${PREMIUM_API.anonKey}`
+    },
+    body:JSON.stringify(payload)
+  });
+  if(!res.ok){
+    const txt=await res.text();
+    throw new Error(txt || `授權服務錯誤 ${res.status}`);
+  }
+  return await res.json();
+}
+
+function setPremiumState(unlocked, message=''){
+  premiumUnlocked=!!unlocked;
+  const msg=document.querySelector('#unlockStatus');
+  msg.classList.toggle('success',premiumUnlocked);
+  if(message) msg.textContent=message;
+  if(premiumUnlocked && premiumReady) document.querySelector('#premiumReport').classList.remove('hidden');
+  if(!premiumUnlocked) document.querySelector('#premiumReport').classList.add('hidden');
+}
+
+async function restorePremiumAccess(){
+  const msg=document.querySelector('#unlockStatus');
+  if(!apiConfigured()){
+    msg.textContent='授權系統尚未完成後端設定。網站管理員請依 README 完成 V6 設定。';
+    return;
+  }
+  try{
+    const result=await callPremiumRpc('check_premium_license',{p_device_token:getDeviceToken()});
+    const ok = result === true || result?.ok === true || result?.active === true;
+    if(ok) setPremiumState(true,'✓ 此裝置已取得 Premium 授權。重新產生資料後會顯示完整報告。');
+  }catch(err){
+    console.warn('Premium restore failed',err);
+  }
+}
+
 document.querySelector('#printReport').addEventListener('click',()=>window.print());
+document.querySelector('#unlockPremium').addEventListener('click',async()=>{
+  const input=document.querySelector('#premiumCode');
+  const btn=document.querySelector('#unlockPremium');
+  const msg=document.querySelector('#unlockStatus');
+  const code=input.value.trim().toUpperCase();
+  if(!code){ msg.textContent='請先輸入 LINE 收到的專屬解鎖碼。'; return; }
+  if(!apiConfigured()){
+    msg.textContent='授權系統尚未完成設定，請聯絡網站管理員。';
+    return;
+  }
+  btn.disabled=true;
+  btn.textContent='驗證中…';
+  msg.classList.remove('success');
+  msg.textContent='正在驗證你的專屬代碼…';
+  try{
+    const result=await callPremiumRpc('activate_premium_code',{p_code:code,p_device_token:getDeviceToken()});
+    const ok=result?.ok === true;
+    if(ok){
+      setPremiumState(true,'✓ 解鎖成功！此裝置已綁定 Premium 授權。');
+      input.value='';
+      if(premiumReady) document.querySelector('#premiumReport').scrollIntoView({behavior:'smooth'});
+    }else{
+      const messages={invalid:'解鎖碼不存在，請確認是否輸入正確。',expired:'此解鎖碼已過期，請透過 LINE 聯絡。',used:'此解鎖碼已達使用次數上限。',inactive:'此解鎖碼目前已停用。'};
+      setPremiumState(false,messages[result?.reason] || '無法啟用此代碼，請透過 LINE 聯絡。');
+    }
+  }catch(err){
+    console.error(err);
+    setPremiumState(false,'驗證服務暫時無法連線，請稍後再試或透過 LINE 聯絡。');
+  }finally{
+    btn.disabled=false;
+    btn.textContent='解鎖完整報告';
+  }
+});
+restorePremiumAccess();
+
 
 document.querySelector('#birthForm').addEventListener('submit', async e=>{
   e.preventDefault();
@@ -618,12 +717,16 @@ document.querySelector('#birthForm').addEventListener('submit', async e=>{
     innerChild.textContent=premium.innerChild; akashicLetter.textContent=premium.akashicLetter;
     quarterGuide.innerHTML=premium.quarters.map((x,i)=>`<div><small>Q${i+1}</small><strong>${esc(x)}</strong></div>`).join('');
     action30.textContent=premium.action30; action90.textContent=premium.action90; action365.textContent=premium.action365;
-    premiumReport.classList.remove('hidden');
+    premiumReady=true;
+    if(premiumUnlocked) premiumReport.classList.remove('hidden');
+    else premiumReport.classList.add('hidden');
 
 
     results.classList.remove('hidden');
     results.scrollIntoView({behavior:'smooth'});
-    status.textContent=`Premium 完整解析完成｜出生地：${place.label}`;
+    status.textContent=premiumUnlocked
+      ? `Premium 完整解析完成｜出生地：${place.label}`
+      : `免費解析完成｜出生地：${place.label}｜完整報告請於下方付款後輸入專屬解鎖碼`;
   }catch(err){
     console.error(err);
     status.textContent='排盤時發生錯誤。請確認資料格式；若部署後仍出現此訊息，可查看瀏覽器 Console 取得錯誤內容。';
