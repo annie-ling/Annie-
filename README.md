@@ -1,3 +1,8 @@
+## V6.7 列印／儲存 PDF 修正版
+- iPhone Safari 列印強制白底黑字
+- PDF 只保留 Premium 完整報告
+- 移除深色背景、漸層、陰影與星空
+
 ## V6.5 RPC 除錯修正版\n- Publishable key 僅放 apikey header\n- 支援 Supabase 回傳 success/message\n- 驗證錯誤會直接顯示於網頁，方便定位\n\n# 玄學人格研究所 V6 Premium｜獨立授權碼版
 
 這版把 V5.2 的「共用前端密碼」升級成 Supabase 後端驗證。
