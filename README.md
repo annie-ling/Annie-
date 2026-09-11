@@ -1,51 +1,15 @@
-# 玄學人格研究所 V3
+# 玄學人格研究所 V3｜iPhone 上傳版
 
-## 已整合
-- 生命靈數 1–9、11、22、33
-- 2026 個人流年
-- 西洋占星：太陽、月亮、上升、主導元素
-- 人類圖：類型、策略、權威、人生角色、定義
-- 八字：四柱、日主、日主五行、真太陽時
-- 水晶象徵性推薦
-- 五術交叉摘要
-- 台灣常用出生城市與自訂經緯度
-- GitHub Actions 自動部署
+這一版已把 main.js 與 style.css 移到最外層，方便使用 iPhone Safari 上傳 GitHub。
 
-## 使用的開源引擎
-- `natalengine`：西洋占星 + Human Design
-- `@openfate/bazi-engine`：八字、節氣與真太陽時
-- 生命靈數：網站內建
+請上傳以下 6 個檔案到 Repository 根目錄：
+- index.html
+- main.js
+- style.css
+- package.json
+- vite.config.js
+- README.md
 
-## 上 GitHub
-1. 建立一個新的 GitHub Repository。
-2. 把這個資料夾內的全部檔案上傳到 Repository 根目錄。
-3. 到 `Settings → Pages`。
-4. Source 選擇 `GitHub Actions`。
-5. 到 `Actions` 等待 `Deploy V3 to GitHub Pages` 完成。
-6. 完成後 GitHub Pages 會顯示網址。
-
-## 本機測試
-```bash
-npm install
-npm run dev
-```
-
-正式建置：
-```bash
-npm run build
-```
-
-## 上線前一定要測
-第三方排盤引擎雖有自己的測試與文件，但正式販售前仍建議用幾組你已知結果的命盤逐項比對，尤其：
-- 節氣交界
-- 23:00 前後出生
-- 夏令時間地區
-- 上升星座交界
-- 人類圖閘門／線切換附近
-
-## 重要說明
-不同八字流派在晚子時、真太陽時、用神等規則可能不同。本版採 `MIDNIGHT_00` 作為日界並啟用真太陽時。
-
-水晶內容只使用「象徵、提醒、探索」的說法，不宣稱治療、改命或保證招財。
-
-玄學、占星、人類圖與八字內容都應定位為文化／娛樂／自我探索，不可取代醫療、心理、法律、投資等專業判斷。
+注意：因為 GitHub Actions 的 workflow 必須位於 `.github/workflows/`，
+iPhone 檔案選擇器不方便建立這個隱藏資料夾，所以 workflow 請在 GitHub 網頁上另外建立。
+建立方式會由 ChatGPT 接著一步一步帶你操作。
