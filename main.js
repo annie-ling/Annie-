@@ -354,6 +354,50 @@ document.querySelector('#app').innerHTML = `
 </section>
 
 <main>
+<section class="section" id="tools">
+  <div class="section-title"><span class="eyebrow">CHOOSE YOUR READING</span><h2>今天想看哪一種解析？</h2><p>原本的個人解析完整保留，另外新增雙人感情契合度測驗。</p></div>
+  <div class="mode-grid">
+    <a class="mode-card" href="#birth"><strong>🔮 個人完整解析</strong><span>生命靈數 × 星座 × 人類圖 × 八字五行 × 水晶</span></a>
+    <a class="mode-card" href="#relationship"><strong>💗 雙人感情契合度</strong><span>只要兩個生日，看感情需求、卡點、相處模式與關係建議</span></a>
+  </div>
+</section>
+
+<section id="relationship" class="section">
+  <div class="section-title"><span class="eyebrow">LOVE COMPATIBILITY</span><h2>你們的感情使用說明書</h2><p>有些問題不是不愛，而是愛人的方式不同。輸入兩個人的生日，看看彼此的需求與互動模式。</p></div>
+  <form id="relationshipForm" class="form-card relationship-form">
+    <label>你的暱稱 <small>選填</small><input id="relNameA" type="text" placeholder="例：曼曼"></label>
+    <label>你的生日<input id="relDateA" type="date" required></label>
+    <label>對方暱稱 <small>選填</small><input id="relNameB" type="text" placeholder="例：豪豪"></label>
+    <label>對方生日<input id="relDateB" type="date" required></label>
+    <button class="primary submit" type="submit">看看我們的感情模式 💗</button>
+    <p class="fineprint">此結果以生命靈數作為娛樂與自我探索用途，不代表關係好壞，也不是心理或伴侶諮商評估。</p>
+  </form>
+</section>
+
+<section id="relationshipResults" class="section hidden relationship-results">
+  <div class="share-card">
+    <span class="eyebrow">OUR LOVE PROFILE</span>
+    <div class="score"><span id="relScore">--</span><small>%</small></div>
+    <h2 id="relType"></h2><p id="relSummary"></p>
+    <div class="chips" id="relChips"></div><div class="sig">玄學人格研究所 · 感情使用說明書</div>
+    <button class="secondary share-love" id="shareLoveCard" type="button">分享我們的戀愛關係卡 💌</button>
+  </div>
+  <div class="relationship-bars">
+    <div><small>情感理解</small><strong id="relEmotion"></strong></div><div><small>溝通契合</small><strong id="relTalk"></strong></div><div><small>長期相處</small><strong id="relLong"></strong></div><div><small>成長互補</small><strong id="relGrowth"></strong></div>
+  </div>
+  <div class="cards" style="margin-top:17px">
+    <article class="panel"><span class="eyebrow">01 · LOVE NEED</span><h3 id="relNeedATitle"></h3><p id="relNeedA"></p></article>
+    <article class="panel"><span class="eyebrow">02 · LOVE NEED</span><h3 id="relNeedBTitle"></h3><p id="relNeedB"></p></article>
+    <article class="panel feature"><span class="eyebrow">03 · STUCK POINT</span><h3>你們最容易卡住的地方</h3><p id="relStuck"></p></article>
+    <article class="panel"><span class="eyebrow">04 · CONFLICT</span><h3>吵架時的你們</h3><p id="relConflict"></p></article>
+    <article class="panel"><span class="eyebrow">05 · TRIGGER</span><h3>彼此的感情地雷</h3><p id="relTrigger"></p></article>
+    <article class="panel"><span class="eyebrow">06 · ATTRACTION</span><h3>為什麼會被彼此吸引</h3><p id="relAttraction"></p></article>
+    <article class="panel"><span class="eyebrow">07 · LONG TERM</span><h3>長期相處模式</h3><p id="relLongTerm"></p></article>
+    <article class="panel feature"><span class="eyebrow">08 · LESSON</span><h3>這段關係的成長課題</h3><p id="relLesson"></p></article>
+    <article class="panel feature"><span class="eyebrow">09 · ADVICE</span><h3>讓關係更舒服的 3 個方法</h3><div id="relAdvice"></div></article>
+  </div>
+</section>
+
 <section id="birth" class="section">
   <div class="section-title">
     <span class="eyebrow">YOUR BIRTH CODE</span>
@@ -644,6 +688,50 @@ document.querySelector('#unlockPremium').addEventListener('click',async()=>{
 });
 restorePremiumAccess();
 
+
+
+const loveProfiles={
+  1:{need:'被尊重、被信任，也需要保有自己的決定空間。',trigger:'被控制、被否定，或每件事都要被追問。',conflict:'情緒上來時容易先捍衛立場，語氣可能比心意更強。'},
+  2:{need:'穩定回應、溫柔確認，以及「你有把我放在心上」的感覺。',trigger:'冷處理、忽冷忽熱、敷衍回應。',conflict:'容易先忍耐，累積久了才一次把委屈說出來。'},
+  3:{need:'分享感、肯定與有趣的互動，希望愛情裡可以做自己。',trigger:'長期沒有回應、過度嚴肅或一直被潑冷水。',conflict:'可能用玩笑帶過真正的情緒，讓對方沒發現你其實受傷了。'},
+  4:{need:'穩定、承諾與可預期的行動，比漂亮話更相信「你有做到」。',trigger:'反覆改變、失約、說到卻做不到。',conflict:'會抓住事情本身與規則，容易讓對方覺得缺少情緒理解。'},
+  5:{need:'新鮮感、自由與一起體驗生活，不喜歡關係變成束縛。',trigger:'過度查勤、限制交友、每天都一模一樣。',conflict:'壓力大時會想先離開現場，需要空間整理自己。'},
+  6:{need:'被珍惜、被需要與穩定陪伴，也很在意關係中的責任感。',trigger:'把付出視為理所當然，或重要時刻缺席。',conflict:'容易一邊照顧一邊期待對方懂，沒被理解時會特別失落。'},
+  7:{need:'深度理解、信任與適量獨處，不喜歡被逼著立刻表態。',trigger:'逼問、侵犯隱私、情緒還沒整理好就要求答案。',conflict:'容易先沉默思考，對方可能誤會成冷淡或逃避。'},
+  8:{need:'尊重、可靠與共同成長，希望兩個人能一起把生活變得更好。',trigger:'不負責任、反覆失信，或把所有壓力丟給你。',conflict:'容易快速進入解決問題模式，忘了對方可能先需要被理解。'},
+  9:{need:'情感共鳴、真誠與價值觀連結，希望愛不只是日常安排。',trigger:'冷漠、自私，或對你的感受毫不在意。',conflict:'容易把當下問題連到過去的感受，需要避免一次背太多情緒。'},
+  11:{need:'深度共鳴、真心回應與精神上的理解。',trigger:'敷衍、忽視直覺感受、說一套做一套。',conflict:'感受很快很深，容易先讀到氣氛再放大不安。'},
+  22:{need:'可靠承諾、共同目標與可以一起建立未來的安全感。',trigger:'沒有規劃、責任不對等、重大事情總是逃避。',conflict:'容易把關係問題當成待完成的專案，需記得先處理感受。'},
+  33:{need:'溫柔互相照顧、被理解，也希望自己的付出被看見。',trigger:'只索取不回應、情緒勒索、把你的善意當義務。',conflict:'太容易先照顧對方，最後才發現自己已經累積很多委屈。'}
+};
+function relationshipType(a,b){const d=Math.abs(a-b);if(a===b)return['同頻鏡像型','你們很容易理解彼此，也可能因為太相似而同時踩進同一個盲點。'];if(d<=2)return['默契陪伴型','你們的節奏接近，建立安全感不難，關鍵是別把「應該懂我」當成不用說。'];if(d>=6)return['反差互補型','差異是吸引力也是課題。懂得翻譯彼此需求時，反而能補上對方看不到的角度。'];return['互補成長型','你們不是用同一種方式愛人，但有機會在磨合裡長出很強的合作感。'];}
+function clamp(n){return Math.max(58,Math.min(96,Math.round(n)));}
+function loveMetrics(a,b){const d=Math.abs(a-b), master=(a>9||b>9)?2:0;return {emotion:clamp(91-d*3+master),talk:clamp(86-d*2+(a%2===b%2?3:0)),long:clamp(88-d+(a===b?4:0)),growth:clamp(80+d*2+master)};}
+document.querySelector('#relationshipForm').addEventListener('submit',e=>{
+  e.preventDefault();const da=document.querySelector('#relDateA').value,db=document.querySelector('#relDateB').value;if(!da||!db)return;
+  const a=lifePath(da),b=lifePath(db),pa=loveProfiles[a]||loveProfiles[reduceLife(a)],pb=loveProfiles[b]||loveProfiles[reduceLife(b)];
+  const na=document.querySelector('#relNameA').value.trim()||'你',nb=document.querySelector('#relNameB').value.trim()||'對方';const [type,summary]=relationshipType(a,b),m=loveMetrics(a,b);const score=Math.round((m.emotion+m.talk+m.long+m.growth)/4);
+  document.querySelector('#relScore').textContent=score;document.querySelector('#relType').textContent=type;document.querySelector('#relSummary').textContent=summary;
+  document.querySelector('#relChips').innerHTML=`<span>${na}｜${a}號</span><span>${nb}｜${b}號</span><span>${type}</span>`;
+  [['#relEmotion',m.emotion],['#relTalk',m.talk],['#relLong',m.long],['#relGrowth',m.growth]].forEach(([id,v])=>document.querySelector(id).textContent=v+'%');
+  document.querySelector('#relNeedATitle').textContent=`${na}真正需要的愛`;document.querySelector('#relNeedA').textContent=pa.need;document.querySelector('#relNeedBTitle').textContent=`${nb}真正需要的愛`;document.querySelector('#relNeedB').textContent=pb.need;
+  document.querySelector('#relStuck').textContent=`${na}比較在意的是「${pa.need.replace(/。$/,'')}」；${nb}比較在意的是「${pb.need.replace(/。$/,'')}」。真正容易卡住的通常不是愛不愛，而是兩個人確認愛的方式不同。發生摩擦時，先確認對方現在要的是理解、答案還是空間。`;
+  document.querySelector('#relConflict').textContent=`${na}：${pa.conflict} ${nb}：${pb.conflict}`;document.querySelector('#relTrigger').textContent=`${na}較容易被「${pa.trigger.replace(/。$/,'')}」踩到；${nb}較容易被「${pb.trigger.replace(/。$/,'')}」踩到。`;
+  const d=Math.abs(a-b);
+  document.querySelector('#relAttraction').textContent=a===b?`${na}和${nb}很容易在彼此身上看到熟悉感：想事情、在意的點或愛人的節奏相近。這種「你真的懂我」會是吸引力，但也要小心兩個人同時固執或同時沉默。`:d>=6?`${na}與${nb}的吸引力很大一部分來自反差。對方身上有自己比較少使用的特質，所以一開始容易覺得新鮮、互補；關係走久後，真正的功課是把差異從「你怎麼跟我不一樣」變成「原來你是這樣接收愛」。`:`${na}與${nb}既有相近的節奏，也保留一些不同。你們容易因為相處舒服而靠近，又會被彼此不同的處理方式吸引。當差異被理解時，這段關係很有一起成長的空間。`;
+  document.querySelector('#relLongTerm').textContent=m.long>=88?`長期來看，你們比較適合建立固定但不僵化的相處默契，例如重要事情提前說、衝突後一定回來談、保留各自空間。穩定感越清楚，越能把彼此的差異變成互補。`:`長期相處的關鍵不是要求兩個人變得一樣，而是建立一套雙方都懂的規則。尤其在聯絡頻率、情緒需要空間時怎麼說、承諾如何做到這三件事上，越具體越不容易反覆卡住。`;
+  document.querySelector('#relLesson').textContent=`這段關係比較值得練習的是「翻譯需求」。${na}要練習把需要說得更具體，${nb}也要練習不要只用自己的方式判斷對方有沒有被愛。契合不是完全沒有摩擦，而是摩擦後越來越知道怎麼回到彼此身邊。`;
+  document.querySelector('#relAdvice').innerHTML=`<p>① 衝突開始時，先說「我現在感覺___，我希望___」，不先替對方下結論。</p><p>② 把「你應該懂」改成具體請求，例如：我現在希望你先陪我五分鐘，再一起想辦法。</p><p>③ 每週留一次不處理問題的相處時間，只分享最近開心、累或期待的事情。</p>`;
+  window.__loveShare={na,nb,score,type,summary,a,b,m};
+  const out=document.querySelector('#relationshipResults');out.classList.remove('hidden');out.scrollIntoView({behavior:'smooth'});
+});
+
+
+document.querySelector('#shareLoveCard').addEventListener('click',async()=>{
+  const x=window.__loveShare;if(!x)return;
+  const text=`💗 ${x.na} × ${x.nb}｜${x.type}\n整體契合度 ${x.score}%\n情感理解 ${x.m.emotion}%・溝通契合 ${x.m.talk}%・長期相處 ${x.m.long}%・成長互補 ${x.m.growth}%\n\n${x.summary}\n— 玄學人格研究所・感情使用說明書`;
+  try{if(navigator.share){await navigator.share({title:'我們的戀愛關係卡',text});}else{await navigator.clipboard.writeText(text);alert('戀愛關係卡文字已複製，可以貼到 IG 限動或訊息分享 💌');}}catch(e){}
+});
 
 document.querySelector('#birthForm').addEventListener('submit', async e=>{
   e.preventDefault();

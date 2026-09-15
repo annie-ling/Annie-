@@ -67,3 +67,7 @@ select public.admin_create_premium_code(
 5. 同一組碼換另一個無痕視窗／裝置再啟用，若 `max_uses=1` 應顯示已達使用上限。
 6. 原本已成功的瀏覽器重新整理後，會由後端確認並恢復 Premium 授權。
 
+
+
+## Relationship V2
+新增互相吸引原因、長期相處模式、關係成長課題，以及可透過系統分享/複製的戀愛關係卡。保留原個人解析、Premium 與追蹤功能。
