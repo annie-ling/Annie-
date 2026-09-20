@@ -114,3 +114,6 @@
 .share-love{margin-top:18px;width:100%;cursor:pointer}.relationship-results .feature{background:linear-gradient(135deg,rgba(187,142,166,.10),rgba(207,177,124,.08))}
 .rel-paid-gate{grid-column:1/-1;text-align:center;padding:34px 24px;border:1px solid rgba(221,185,130,.25);border-radius:26px;background:linear-gradient(145deg,rgba(49,34,61,.94),rgba(27,20,35,.96));box-shadow:var(--shadow)}
 .rel-paid-gate h2{margin:10px 0}.rel-paid-gate>p{max-width:700px;margin:10px auto 20px;color:var(--muted)}.rel-lock-icon{font-size:2rem;margin-bottom:8px}.rel-paid-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;max-width:650px;margin:20px auto}.rel-paid-list span{padding:12px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.025)}.rel-paid-gate .price-box{max-width:460px;margin:22px auto}.rel-paid-gate .line-pay{max-width:460px;margin:12px auto;display:block}.rel-paid-gate .code-unlock{max-width:650px;margin:24px auto 0;text-align:left}@media(max-width:650px){.rel-paid-list{grid-template-columns:1fr}}
+
+/* V4 sales funnel */
+.funnel-note{max-width:650px;margin:14px auto 0;padding:12px 14px;border:1px dashed rgba(221,185,130,.28);border-radius:14px;color:#b8aebd;font-size:.82rem}.funnel-note b{color:#ddb982}.rel-paid-gate .line-pay{cursor:pointer}.rel-paid-gate .code-unlock{scroll-margin-top:24px}

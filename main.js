@@ -395,9 +395,9 @@ document.querySelector('#app').innerHTML = `
       <p>免費版先讓你看見彼此需要的愛與最容易卡住的地方。完整版本會繼續拆解吵架模式、感情地雷、互相吸引、長期相處與專屬建議。</p>
       <div class="rel-paid-list"><span>♡ 吵架時的你們</span><span>⚡ 彼此的感情地雷</span><span>✦ 為什麼互相吸引</span><span>∞ 長期相處模式</span><span>☾ 關係成長課題</span><span>✓ 3 個專屬相處方法</span></div>
       <div class="price-box"><div class="price-launch"><span>雙人完整感情解析</span><strong>NT$149</strong></div><div class="price-caption">一次解鎖・不用重新測驗</div></div>
-      <a class="line-pay" href="https://line.me/ti/p/Vfr2_tJJK7" target="_blank" rel="noopener">立即解鎖 NT$149</a>
-      <p class="unlock-note">付款完成後取得專屬解鎖碼，回到這裡輸入即可展開剛剛兩人的完整結果。</p>
-      <div class="code-unlock"><label for="relUnlockCode">已付款？輸入感情解析解鎖碼</label><div class="code-row"><input id="relUnlockCode" type="text" autocomplete="off" placeholder="輸入解鎖碼"><button id="unlockRelationship" type="button">解鎖感情解析</button></div><p id="relUnlockStatus" class="unlock-status">站長測試可輸入 TEST149，不需實際付款。</p></div>
+      <a class="line-pay" id="relationshipPayButton" href="https://line.me/ti/p/Vfr2_tJJK7" target="_blank" rel="noopener">前往 LINE｜解鎖 NT$149</a>
+      <p class="unlock-note">加入 LINE 後傳送「感情解析＋你的暱稱」。完成付款後，我會提供一組專屬解鎖碼；回到這裡輸入即可展開剛剛兩人的完整結果。</p><div class="funnel-note"><b>付款後不用重新測驗</b>｜這個頁面先不要關閉，取得代碼後直接回來輸入即可。</div>
+      <div class="code-unlock"><label for="relUnlockCode">已付款？輸入感情解析解鎖碼</label><div class="code-row"><input id="relUnlockCode" type="text" autocomplete="off" placeholder="輸入解鎖碼"><button id="unlockRelationship" type="button">解鎖感情解析</button></div><p id="relUnlockStatus" class="unlock-status">付款完成後，請輸入你在 LINE 收到的專屬解鎖碼。站長測試碼：TEST149。</p></div>
     </div>
     <div id="relPaidContent" class="cards hidden" style="grid-column:1/-1">
       <article class="panel"><span class="eyebrow">04 · CONFLICT</span><h3>吵架時的你們</h3><p id="relConflict"></p></article>
@@ -735,28 +735,60 @@ document.querySelector('#relationshipForm').addEventListener('submit',e=>{
   document.querySelector('#relLesson').textContent=`這段關係比較值得練習的是「翻譯需求」。${na}要練習把需要說得更具體，${nb}也要練習不要只用自己的方式判斷對方有沒有被愛。契合不是完全沒有摩擦，而是摩擦後越來越知道怎麼回到彼此身邊。`;
   document.querySelector('#relAdvice').innerHTML=`<p>① 衝突開始時，先說「我現在感覺___，我希望___」，不先替對方下結論。</p><p>② 把「你應該懂」改成具體請求，例如：我現在希望你先陪我五分鐘，再一起想辦法。</p><p>③ 每週留一次不處理問題的相處時間，只分享最近開心、累或期待的事情。</p>`;
   window.__loveShare={na,nb,score,type,summary,a,b,m};
-  const out=document.querySelector('#relationshipResults');out.classList.remove('hidden');out.scrollIntoView({behavior:'smooth'});
+  const out=document.querySelector('#relationshipResults');out.classList.remove('hidden');trackRelationshipEvent('result_view');out.scrollIntoView({behavior:'smooth'});
 });
 
 
+function getRelationshipDeviceToken(){
+  let token=localStorage.getItem('mysticRelationshipDeviceToken');
+  if(!token){
+    token=(crypto?.randomUUID?.() || `rel-${Date.now()}-${Math.random().toString(36).slice(2)}`);
+    localStorage.setItem('mysticRelationshipDeviceToken',token);
+  }
+  return token;
+}
+async function trackRelationshipEvent(eventName){
+  if(!apiConfigured()) return;
+  try{ await callPremiumRpc('record_relationship_event',{p_event:eventName,p_device_token:getRelationshipDeviceToken()}); }
+  catch(err){ console.warn('Relationship funnel log failed',err); }
+}
 function setRelationshipUnlocked(on){
   const paid=document.querySelector('#relPaidContent'), gate=document.querySelector('#relPaidGate');
   if(!paid||!gate)return;
   paid.classList.toggle('hidden',!on);
   gate.classList.toggle('hidden',on);
-  if(on) localStorage.setItem('mysticRelationship149Test','1');
+  if(on) localStorage.setItem('mysticRelationship149Active','1');
 }
-document.querySelector('#unlockRelationship').addEventListener('click',()=>{
-  const code=document.querySelector('#relUnlockCode').value.trim().toUpperCase();
+async function restoreRelationshipAccess(){
+  if(!apiConfigured()) return;
+  try{
+    const result=await callPremiumRpc('check_relationship_license',{p_device_token:getRelationshipDeviceToken()});
+    const ok=result===true || result?.ok===true || result?.active===true;
+    if(ok) setRelationshipUnlocked(true);
+  }catch(err){ console.warn('Relationship restore failed',err); }
+}
+document.querySelector('#relationshipPayButton')?.addEventListener('click',()=>trackRelationshipEvent('pay_click'));
+document.querySelector('#unlockRelationship').addEventListener('click',async()=>{
+  const input=document.querySelector('#relUnlockCode');
+  const btn=document.querySelector('#unlockRelationship');
+  const code=input.value.trim().toUpperCase();
   const msg=document.querySelector('#relUnlockStatus');
+  if(!code){msg.textContent='請先輸入你在 LINE 收到的專屬解鎖碼。';return;}
   if(code==='TEST149'){
-    msg.textContent='✓ 測試解鎖成功！'; msg.classList.add('success');
-    setRelationshipUnlocked(true);
-    setTimeout(()=>document.querySelector('#relPaidContent').scrollIntoView({behavior:'smooth'}),80);
-  }else{
-    msg.textContent='目前此版本僅開放站長測試碼 TEST149；正式客戶碼需串接付款／授權後台。'; msg.classList.remove('success');
+    msg.textContent='✓ 站長測試解鎖成功！';msg.classList.add('success');setRelationshipUnlocked(true);trackRelationshipEvent('test_unlock');
+    setTimeout(()=>document.querySelector('#relPaidContent').scrollIntoView({behavior:'smooth'}),80);return;
   }
+  if(!apiConfigured()){msg.textContent='授權系統尚未完成設定，請聯絡網站管理員。';return;}
+  btn.disabled=true;btn.textContent='驗證中…';msg.classList.remove('success');msg.textContent='正在驗證你的專屬代碼…';
+  try{
+    const result=await callPremiumRpc('activate_relationship_code',{p_code:code,p_device_token:getRelationshipDeviceToken()});
+    const ok=result?.success===true || result?.ok===true;
+    if(ok){msg.textContent='✓ 解鎖成功！這台裝置已取得完整感情解析。';msg.classList.add('success');setRelationshipUnlocked(true);input.value='';await trackRelationshipEvent('paid_unlock');setTimeout(()=>document.querySelector('#relPaidContent').scrollIntoView({behavior:'smooth'}),80);}
+    else{const messages={invalid:'解鎖碼不存在，請確認是否輸入正確。',expired:'此解鎖碼已過期，請透過 LINE 聯絡。',used:'此解鎖碼已達使用次數上限。',inactive:'此解鎖碼目前已停用。'};msg.textContent=result?.message||messages[result?.reason]||'無法啟用此代碼，請透過 LINE 聯絡。';}
+  }catch(err){msg.textContent=`驗證失敗：${err?.message||'未知錯誤'}`;}
+  finally{btn.disabled=false;btn.textContent='解鎖感情解析';}
 });
+restoreRelationshipAccess();
 
 document.querySelector('#shareLoveCard').addEventListener('click',async()=>{
   const x=window.__loveShare;if(!x)return;
