@@ -89,3 +89,23 @@ select public.admin_create_premium_code(
 7. 在 Supabase Table Editor 可看 `relationship_codes`、`relationship_licenses`、`relationship_funnel_events`。也可執行 SQL 檔最下方的查詢看漏斗人數。
 
 注意：這版是「LINE 人工確認付款 + 專屬一次性碼」，不是自動金流。不要把 Supabase service-role key 放進網站；目前前端只使用 publishable key。
+
+## V6｜安全銷售管理後台
+新增 `admin.html` 管理頁，管理員登入後可以：
+- 看免費結果人數、NT$149 點擊數、付費解鎖數與轉換率
+- 一鍵產生每位客人的隨機專屬解鎖碼
+- 設定可啟用裝置數與到期日
+- 查看最近代碼使用狀態
+- 停用／重新啟用代碼
+
+### V5 升級 V6（不會清掉既有資料）
+1. 先保留原本 V5 Supabase 資料。
+2. 到 Supabase > SQL Editor 執行新的 `relationship-admin-setup.sql`。
+3. 到 Supabase > Authentication > Users 建立「你自己的管理員帳號（Email + Password）」。
+4. 複製該帳號的 User UID。
+5. 回 SQL Editor 執行：
+   `insert into public.relationship_admins(user_id) values ('你的 User UID') on conflict do nothing;`
+6. 將 V6 全部檔案上傳 GitHub 覆蓋舊版。
+7. 網址最後加 `/admin.html` 進入管理後台。
+
+安全提醒：V6 沒有把站長測試碼、管理密碼或 service-role key 寫進公開網站。管理權限由 Supabase Auth + 後端 RPC 驗證。
