@@ -389,25 +389,24 @@ document.querySelector('#app').innerHTML = `
     <article class="panel"><span class="eyebrow">01 · LOVE NEED</span><h3 id="relNeedATitle"></h3><p id="relNeedA"></p></article>
     <article class="panel"><span class="eyebrow">02 · LOVE NEED</span><h3 id="relNeedBTitle"></h3><p id="relNeedB"></p></article>
     <article class="panel feature"><span class="eyebrow">03 · STUCK POINT</span><h3>你們最容易卡住的地方</h3><p id="relStuck"></p></article>
-  </div>
-  <div class="love-paywall">
-    <span class="premium-badge">LOVE DEEP READING</span>
-    <h2>看到這裡有一點「太像我們」？</h2>
-    <p class="love-paywall-lead">免費版先讓你看見你們的需求與卡點。真正影響一段關係的，往往是吵架後怎麼靠近、彼此踩到什麼地雷，以及怎麼把愛說成對方聽得懂的方式。</p>
-    <div class="locked-love-grid">
-      <div><b>🔒 04</b><strong>吵架時的你們</strong><span>看懂衝突裡真正想被理解的是什麼</span></div>
-      <div><b>🔒 05</b><strong>彼此的感情地雷</strong><span>找出最容易反覆踩到的敏感點</span></div>
-      <div><b>🔒 06</b><strong>為什麼會被彼此吸引</strong><span>你們一開始互相靠近的核心原因</span></div>
-      <div><b>🔒 07</b><strong>長期相處模式</strong><span>熱戀過後，怎麼相處才不會一直內耗</span></div>
-      <div><b>🔒 08</b><strong>這段關係的成長課題</strong><span>這段關係正在教會你們什麼</span></div>
-      <div><b>🔒 09</b><strong>3 個專屬相處方法</strong><span>把解析變成你們真的做得到的行動</span></div>
+    <div id="relPaidGate" class="rel-paid-gate">
+      <div class="rel-lock-icon">🔒</div><span class="premium-badge">LOVE DEEP READING</span>
+      <h2>你們真正卡住的原因，還在後面</h2>
+      <p>免費版先讓你看見彼此需要的愛與最容易卡住的地方。完整版本會繼續拆解吵架模式、感情地雷、互相吸引、長期相處與專屬建議。</p>
+      <div class="rel-paid-list"><span>♡ 吵架時的你們</span><span>⚡ 彼此的感情地雷</span><span>✦ 為什麼互相吸引</span><span>∞ 長期相處模式</span><span>☾ 關係成長課題</span><span>✓ 3 個專屬相處方法</span></div>
+      <div class="price-box"><div class="price-launch"><span>雙人完整感情解析</span><strong>NT$149</strong></div><div class="price-caption">一次解鎖・不用重新測驗</div></div>
+      <a class="line-pay" href="https://line.me/ti/p/Vfr2_tJJK7" target="_blank" rel="noopener">立即解鎖 NT$149</a>
+      <p class="unlock-note">付款完成後取得專屬解鎖碼，回到這裡輸入即可展開剛剛兩人的完整結果。</p>
+      <div class="code-unlock"><label for="relUnlockCode">已付款？輸入感情解析解鎖碼</label><div class="code-row"><input id="relUnlockCode" type="text" autocomplete="off" placeholder="輸入解鎖碼"><button id="unlockRelationship" type="button">解鎖感情解析</button></div><p id="relUnlockStatus" class="unlock-status">站長測試可輸入 TEST149，不需實際付款。</p></div>
     </div>
-    <div class="love-price"><small>首次解鎖體驗價</small><strong>NT$149</strong><span>一次解鎖・雙人感情深度解析</span></div>
-    <a class="love-buy" href="https://line.me/ti/p/Vfr2_tJJK7" target="_blank" rel="noopener">解鎖我們的完整感情解析 →</a>
-    <p class="love-micro">加入 LINE 後傳送「感情解析＋兩人暱稱」，即可取得購買方式。</p>
-  </div>
-  <div class="hidden" aria-hidden="true">
-    <p id="relConflict"></p><p id="relTrigger"></p><p id="relAttraction"></p><p id="relLongTerm"></p><p id="relLesson"></p><div id="relAdvice"></div>
+    <div id="relPaidContent" class="cards hidden" style="grid-column:1/-1">
+      <article class="panel"><span class="eyebrow">04 · CONFLICT</span><h3>吵架時的你們</h3><p id="relConflict"></p></article>
+      <article class="panel"><span class="eyebrow">05 · TRIGGER</span><h3>彼此的感情地雷</h3><p id="relTrigger"></p></article>
+      <article class="panel"><span class="eyebrow">06 · ATTRACTION</span><h3>為什麼會被彼此吸引</h3><p id="relAttraction"></p></article>
+      <article class="panel"><span class="eyebrow">07 · LONG TERM</span><h3>長期相處模式</h3><p id="relLongTerm"></p></article>
+      <article class="panel feature"><span class="eyebrow">08 · LESSON</span><h3>這段關係的成長課題</h3><p id="relLesson"></p></article>
+      <article class="panel feature"><span class="eyebrow">09 · ADVICE</span><h3>讓關係更舒服的 3 個方法</h3><div id="relAdvice"></div></article>
+    </div>
   </div>
 </section>
 
@@ -537,16 +536,16 @@ document.querySelector('#app').innerHTML = `
 <section id="unlock" class="section unlock-section">
   <div class="unlock-card">
     <span class="premium-badge">PREMIUM 完整人生解析</span>
-    <h2>想看的不只有感情？</h2>
-    <p>如果你也想把焦點拉回自己，完整人生版會從關係、事業、財富與人生課題一路整理到 2027 行動方向。</p>
+    <h2>想看更深的你？</h2>
+    <p>完整版本包含感情關係藍圖、事業與財富模式、人生挑戰、內在小孩、阿卡西式靈魂探索、2027 四季導航與行動計畫。</p>
     <div class="unlock-points"><span>♡ 感情深度解析</span><span>✦ 事業／適合賺什麼錢</span><span>☾ 2027 年度導航</span><span>◇ 完整深度人生報告</span></div>
     <div class="price-box" aria-label="付費完整解析價格">
       <div class="price-original"><span>原價</span><del>NT$990</del></div>
       <div class="price-launch"><span>首發體驗價</span><strong>NT$590</strong></div>
       <div class="price-caption">一次解鎖・完整深度解析報告</div>
     </div>
-    <a class="line-pay" href="https://line.me/ti/p/Vfr2_tJJK7" target="_blank" rel="noopener">解鎖我的完整人生解析 →</a>
-    <p class="unlock-note">加入 LINE 後傳送「完整人生解析＋你的姓名／暱稱」。付款確認後，我會提供專屬解鎖碼。</p>
+    <a class="line-pay" href="https://line.me/ti/p/Vfr2_tJJK7" target="_blank" rel="noopener">加入 LINE｜詢問付費完整解析</a>
+    <p class="unlock-note">加入後請傳送「完整解析＋你的姓名／暱稱」。付款確認後，我會提供你的專屬解鎖碼。</p>
     <div class="code-unlock">
       <label for="premiumCode">已付款？輸入解鎖碼</label>
       <div class="code-row"><input id="premiumCode" type="text" autocomplete="off" placeholder="輸入解鎖碼"><button id="unlockPremium" type="button">解鎖完整報告</button></div>
@@ -739,6 +738,25 @@ document.querySelector('#relationshipForm').addEventListener('submit',e=>{
   const out=document.querySelector('#relationshipResults');out.classList.remove('hidden');out.scrollIntoView({behavior:'smooth'});
 });
 
+
+function setRelationshipUnlocked(on){
+  const paid=document.querySelector('#relPaidContent'), gate=document.querySelector('#relPaidGate');
+  if(!paid||!gate)return;
+  paid.classList.toggle('hidden',!on);
+  gate.classList.toggle('hidden',on);
+  if(on) localStorage.setItem('mysticRelationship149Test','1');
+}
+document.querySelector('#unlockRelationship').addEventListener('click',()=>{
+  const code=document.querySelector('#relUnlockCode').value.trim().toUpperCase();
+  const msg=document.querySelector('#relUnlockStatus');
+  if(code==='TEST149'){
+    msg.textContent='✓ 測試解鎖成功！'; msg.classList.add('success');
+    setRelationshipUnlocked(true);
+    setTimeout(()=>document.querySelector('#relPaidContent').scrollIntoView({behavior:'smooth'}),80);
+  }else{
+    msg.textContent='目前此版本僅開放站長測試碼 TEST149；正式客戶碼需串接付款／授權後台。'; msg.classList.remove('success');
+  }
+});
 
 document.querySelector('#shareLoveCard').addEventListener('click',async()=>{
   const x=window.__loveShare;if(!x)return;
