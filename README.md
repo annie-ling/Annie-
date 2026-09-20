@@ -75,8 +75,7 @@ select public.admin_create_premium_code(
 ## V3.1｜NT$149 感情解析轉換測試
 - 免費顯示：契合度、雙方感情需求、最容易卡住的地方。
 - 付費鎖定：吵架模式、感情地雷、吸引原因、長期相處、成長課題、3 個相處方法。
-- 站長測試碼：`TEST149`（僅供測試；正式上線前請改為後端授權）。
-- NT$149 按鈕目前導向 LINE。正式客戶付款碼尚未串接，不應直接拿 `TEST149` 給客人。
+- NT$149 按鈕導向 LINE；付款確認後，請為每位客人建立一組專屬解鎖碼。
 
 ## V4｜NT$149 正式銷售流程
 1. 先在 Supabase SQL Editor 執行 `relationship-sales-setup.sql`。
@@ -86,7 +85,7 @@ select public.admin_create_premium_code(
    `select public.admin_create_relationship_code('LOVE-A7K9-Q2MX','客人暱稱 / 日期',1,'2027-12-31 23:59:59+08');`
    請每位客人換一組不同代碼。
 5. 把代碼傳給客人。客人回網站輸入後，會綁定該瀏覽器／裝置並展開完整感情解析。
-6. 正式解鎖會匿名記錄 `paid_unlock`；`TEST149` 仍保留給站長測試，並記為 `test_unlock`，不應提供給客人。
+6. 正式解鎖會匿名記錄 `paid_unlock`；網站前台不含任何公開測試碼或測試後門。
 7. 在 Supabase Table Editor 可看 `relationship_codes`、`relationship_licenses`、`relationship_funnel_events`。也可執行 SQL 檔最下方的查詢看漏斗人數。
 
 注意：這版是「LINE 人工確認付款 + 專屬一次性碼」，不是自動金流。不要把 Supabase service-role key 放進網站；目前前端只使用 publishable key。

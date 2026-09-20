@@ -397,7 +397,7 @@ document.querySelector('#app').innerHTML = `
       <div class="price-box"><div class="price-launch"><span>雙人完整感情解析</span><strong>NT$149</strong></div><div class="price-caption">一次解鎖・不用重新測驗</div></div>
       <a class="line-pay" id="relationshipPayButton" href="https://line.me/ti/p/Vfr2_tJJK7" target="_blank" rel="noopener">前往 LINE｜解鎖 NT$149</a>
       <p class="unlock-note">加入 LINE 後傳送「感情解析＋你的暱稱」。完成付款後，我會提供一組專屬解鎖碼；回到這裡輸入即可展開剛剛兩人的完整結果。</p><div class="funnel-note"><b>付款後不用重新測驗</b>｜這個頁面先不要關閉，取得代碼後直接回來輸入即可。</div>
-      <div class="code-unlock"><label for="relUnlockCode">已付款？輸入感情解析解鎖碼</label><div class="code-row"><input id="relUnlockCode" type="text" autocomplete="off" placeholder="輸入解鎖碼"><button id="unlockRelationship" type="button">解鎖感情解析</button></div><p id="relUnlockStatus" class="unlock-status">付款完成後，請輸入你在 LINE 收到的專屬解鎖碼。站長測試碼：TEST149。</p></div>
+      <div class="code-unlock"><label for="relUnlockCode">已付款？輸入感情解析解鎖碼</label><div class="code-row"><input id="relUnlockCode" type="text" autocomplete="off" placeholder="輸入解鎖碼"><button id="unlockRelationship" type="button">解鎖感情解析</button></div><p id="relUnlockStatus" class="unlock-status">付款完成後，請輸入你在 LINE 收到的專屬解鎖碼。</p></div>
     </div>
     <div id="relPaidContent" class="cards hidden" style="grid-column:1/-1">
       <article class="panel"><span class="eyebrow">04 · CONFLICT</span><h3>吵架時的你們</h3><p id="relConflict"></p></article>
@@ -774,10 +774,6 @@ document.querySelector('#unlockRelationship').addEventListener('click',async()=>
   const code=input.value.trim().toUpperCase();
   const msg=document.querySelector('#relUnlockStatus');
   if(!code){msg.textContent='請先輸入你在 LINE 收到的專屬解鎖碼。';return;}
-  if(code==='TEST149'){
-    msg.textContent='✓ 站長測試解鎖成功！';msg.classList.add('success');setRelationshipUnlocked(true);trackRelationshipEvent('test_unlock');
-    setTimeout(()=>document.querySelector('#relPaidContent').scrollIntoView({behavior:'smooth'}),80);return;
-  }
   if(!apiConfigured()){msg.textContent='授權系統尚未完成設定，請聯絡網站管理員。';return;}
   btn.disabled=true;btn.textContent='驗證中…';msg.classList.remove('success');msg.textContent='正在驗證你的專屬代碼…';
   try{

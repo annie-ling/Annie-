@@ -25,7 +25,7 @@ create table if not exists public.relationship_licenses (
 create table if not exists public.relationship_funnel_events (
   id bigint generated always as identity primary key,
   device_token text not null,
-  event_name text not null check (event_name in ('result_view','pay_click','paid_unlock','test_unlock')),
+  event_name text not null check (event_name in ('result_view','pay_click','paid_unlock')),
   created_at timestamptz not null default now()
 );
 
@@ -63,7 +63,7 @@ $$;
 create or replace function public.record_relationship_event(p_event text,p_device_token text)
 returns jsonb language plpgsql security definer set search_path=public as $$
 begin
-  if p_event not in ('result_view','pay_click','paid_unlock','test_unlock') or p_device_token is null or btrim(p_device_token)='' then return jsonb_build_object('ok',false); end if;
+  if p_event not in ('result_view','pay_click','paid_unlock') or p_device_token is null or btrim(p_device_token)='' then return jsonb_build_object('ok',false); end if;
   insert into public.relationship_funnel_events(device_token,event_name) values(p_device_token,p_event);
   return jsonb_build_object('ok',true);
 end; $$;
