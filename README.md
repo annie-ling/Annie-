@@ -1,3 +1,15 @@
+
+## V8.2 後台修正
+先前 Vite 只建置 `index.html`，可能造成 GitHub Pages 上的 `admin.html` 沒有被輸出，因此後台網址會打不開。
+
+V8.2 已改成「多頁建置」：
+- 前台：`index.html`
+- 後台：`admin.html`
+
+部署成功後，後台網址應為：
+`https://annie-ling.github.io/Annie-/admin.html`
+
+
 # Mystic Relationship V8｜玄學內容保留・官方 LINE 成交版
 
 這版以原本 V6 Admin 正式版為基礎，**沒有刪除原本玄學人格研究所內容**。
