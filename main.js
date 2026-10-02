@@ -552,7 +552,7 @@ document.querySelector('#app').innerHTML = `
       <div class="price-launch"><span>首發體驗價</span><strong>NT$590</strong></div>
       <div class="price-caption">一次解鎖・完整深度解析報告</div>
     </div>
-    <a class="line-pay" href="https://line.me/ti/p/Vfr2_tJJK7" target="_blank" rel="noopener">加入 LINE｜詢問付費完整解析</a>
+    <a class="line-pay" href="https://lin.ee/yCtrP2r" target="_blank" rel="noopener">前往官方 LINE｜詢問完整解析</a>
     <p class="unlock-note">加入後請傳送「完整解析＋你的姓名／暱稱」。付款確認後，我會提供你的專屬解鎖碼。</p>
     <div class="code-unlock">
       <label for="premiumCode">已付款？輸入解鎖碼</label>
